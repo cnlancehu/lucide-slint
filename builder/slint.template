@@ -1,0 +1,12 @@
+{% for icon in icons %}
+
+/// {{ icon.name_pascal }}
+{% if icon.deprecated %}/// Deprecated icon, use with cautious.{% endif %}
+export component {{ icon.name_pascal }} inherits Image {
+    in property <length> size: 24px;
+    width: size;
+    height: size;
+    source: @image-url("{{ icon.url }}");
+}
+
+{% endfor %}
