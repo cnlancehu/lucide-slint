@@ -10,11 +10,17 @@
 # Lucide Slint
 Implementation of the lucide icon library for Slint.
 
+<p align="center">
+  <a href="https://crates.io/crates/lucide-slint">crates.io</a>
+  ·
+  <a href="https://docs.rs/lucide-slint/">Documentation</a>
+</p>
+
 # Installation
 In an existing Slint project, run the following command to add lucide-slint as a dependency:
 
 ```bash
-cargo add lucide-slint
+cargo add lucide-slint --build
 ```
 
 Add the following to your `build.rs` file to import `lucide-slint` as a Slint library:
