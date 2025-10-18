@@ -62,6 +62,25 @@
 //! }
 //! ```
 //! 
+//! Or if you just want to use the raw [image](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#image) data, you can access the icon via `Icons`:
+//! 
+//! ```slint
+//! import { Icons } from "@lucide";
+//! 
+//! Button {
+//!     text: "Back";
+//!     icon: Icons.ArrowLeftIcon;
+//!     colorize-icon: true;
+//! }
+//! 
+//! // equivalent to
+//! Button {
+//!     text: "Back";
+//!     icon: @image-url("icons/arrow-left.svg"); // The path is actually relative to the lucide-slint package, use `Icons.ArrowLeftIcon` instead.
+//!     colorize-icon: true;
+//! }
+//! ```
+//! 
 //! # Available Icons
 //! 
 //! For a complete list of available icons, visit the [Lucide Icons](https://lucide.dev/icons/) website.

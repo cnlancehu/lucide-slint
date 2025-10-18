@@ -10,3 +10,10 @@ export component {{ icon.name_pascal }} inherits Image {
 }
 
 {% endfor %}
+
+export global Icons {
+    {% for icon in icons %}
+    /// {{ icon.name_pascal }}
+    out property <image> {{ icon.name_pascal }}: @image-url("{{ icon.url }}");
+    {% endfor %}
+}
