@@ -1,6 +1,6 @@
 use std::{
     fs::{self},
-    path::PathBuf,
+    path::{Path, PathBuf},
 };
 
 use cnxt::Colorize;
@@ -73,8 +73,8 @@ fn read_icon_names(
 }
 
 fn process_icons(
-    icons_dir_path: &PathBuf,
-    icons_target_dir_path: &PathBuf,
+    icons_dir_path: &Path,
+    icons_target_dir_path: &Path,
     icon_names: Vec<String>,
 ) -> Result<Vec<definition::Icon>, Box<dyn std::error::Error>> {
     icon_names
@@ -111,7 +111,7 @@ fn process_icons(
 
 fn generate_slint_file(
     template: &Tera,
-    target_dir_path: &PathBuf,
+    target_dir_path: &Path,
     icons: &[definition::Icon],
 ) -> Result<(), Box<dyn std::error::Error>> {
     let mut context = Context::new();
