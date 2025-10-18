@@ -18,7 +18,7 @@
 </p>
 
 # Lucide Slint
-Implementation of the lucide icon library for Slint.
+Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for Slint.
 
 # Installation
 In an existing Slint project, run the following command to add lucide-slint as a **build** dependency:
@@ -39,7 +39,7 @@ fn main() {
     )]);
     let config = slint_build::CompilerConfiguration::new().with_library_paths(library);
 
-    // Your default Slint build code
+    // Specify your Slint code entry here
     slint_build::compile_with_config("ui/main.slint", config).expect("Slint build failed");
 }
 ```
@@ -57,6 +57,21 @@ export component App inherits Window {
             colorize: #fff;
         }
     }
+}
+```
+
+The Icon component inherits an [`Image element`](https://docs.slint.dev/latest/docs/slint/reference/elements/image/), so you can set properties like `vertical-tiling`, `width`, etc.
+
+```slint
+import { FlowerIcon } from "@lucide";
+
+FlowerIcon {
+    size: 36px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    vertical-tiling: round;
+    horizontal-tiling: round;
 }
 ```
 
@@ -79,6 +94,6 @@ AArrowDownIcon { }
 ```
 
 # License
-This project is licensed under the MIT License, while Lucide is licensed under the ISC License or the MIT License.
+This project is licensed under the MIT License, while Lucide is licensed under the ISC License.
 
 See [LICENSE](./LICENSE) for more details.
