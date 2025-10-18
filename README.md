@@ -8,6 +8,10 @@
 </p>
 
 <p align="center">
+  <a href="https://crates.io/crates/lucide-slint"><img alt="Crates.io" src="https://img.shields.io/crates/v/lucide-slint"></a>
+</p>
+
+<p align="center">
   <a href="https://crates.io/crates/lucide-slint">crates.io</a>
   ·
   <a href="https://docs.rs/lucide-slint/">Documentation</a>
