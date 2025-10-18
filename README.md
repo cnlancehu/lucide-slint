@@ -7,17 +7,17 @@
   </a>
 </p>
 
-# Lucide Slint
-Implementation of the lucide icon library for Slint.
-
 <p align="center">
   <a href="https://crates.io/crates/lucide-slint">crates.io</a>
   ·
   <a href="https://docs.rs/lucide-slint/">Documentation</a>
 </p>
 
+# Lucide Slint
+Implementation of the lucide icon library for Slint.
+
 # Installation
-In an existing Slint project, run the following command to add lucide-slint as a dependency:
+In an existing Slint project, run the following command to add lucide-slint as a **build** dependency:
 
 ```bash
 cargo add lucide-slint --build
@@ -71,13 +71,10 @@ To use an icon in Slint:
 ```slint
 import { AArrowDownIcon } from "@lucide";
 
-AArrowDownIcon {
-    size: 24px;
-    colorize: #fff;
-}
+AArrowDownIcon { }
 ```
 
 # License
-This project is licensed under the MIT License, while Lucide is licensed under the ISC License.
+This project is licensed under the MIT License, while Lucide is licensed under the ISC License or the MIT License.
 
 See [LICENSE](./LICENSE) for more details.
