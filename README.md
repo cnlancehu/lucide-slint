@@ -20,6 +20,14 @@
 # Lucide Slint
 Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for Slint.
 
+# Status
+We're working on making icons available as `Path` elements inheriting from `Rectangle` in future releases for better performance, GPU acceleration, and reduced memory usage.
+
+The implementation is complete and awaiting the merge of a [pending PR](https://github.com/slint-ui/slint/pull/9912) into the latest Slint version.
+
+Once merged, we'll release a new version of `lucide-slint`.
+
+
 # Installation
 In an existing Slint project, run the following command to add lucide-slint as a **build** dependency:
 

@@ -2,11 +2,26 @@
 
 /// {{ icon.name_pascal }}
 {% if icon.deprecated %}/// Deprecated icon, use with cautious.{% endif %}
-export component {{ icon.name_pascal }} inherits Image {
-    in property <length> size: 24px;
+export component {{ icon.name_pascal }} inherits Rectangle {
+    in-out property <brush> stroke: #ffffff;
+    in-out property <length> size: {{ icon.svg.size }}px;
     width: size;
     height: size;
-    source: @image-url("{{ icon.url }}");
+    clip: false;
+    {% for path in icon.svg.paths %}
+    Path {
+        x: {{ path.x_scale }} * parent.size;
+        y:  {{ path.y_scale }} * parent.size;
+        width: {{ path.width_scale }} * parent.size;
+        height: {{ path.height_scale }} * parent.size;
+        commands: "{{ path.commands }}";
+
+        stroke: parent.stroke;
+        stroke-width: parent.width / 12;
+        stroke-line-cap: round;
+        // stroke-line-join: round;
+    }
+    {% endfor %}
 }
 
 {% endfor %}

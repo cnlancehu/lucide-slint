@@ -1,10 +1,12 @@
 use std::{
+    fmt::Write as _,
     fs::{self},
     path::{Path, PathBuf},
 };
 
 use cnxt::Colorize;
 use tera::{Context, Tera};
+use usvg::{Node, Options, Tree, WriteOptions, tiny_skia_path::PathSegment};
 
 use crate::definition::IconMetadata;
 
@@ -88,6 +90,14 @@ fn process_icons(
             let icon_raw_svg = fs::read_to_string(
                 icons_dir_path.join(&icon_raw_svg_filename),
             )?;
+            let icon_svg_tree =
+                usvg::Tree::from_str(&icon_raw_svg, &Options::default())?;
+            let icon_svg_definition = process_icons_svg(&icon_svg_tree);
+
+            let icon_raw_svg = icon_svg_tree.to_string(&WriteOptions {
+                indent: usvg::Indent::None,
+                ..Default::default()
+            });
 
             let icon_metadata =
                 fs::read(icons_dir_path.join(icon_metadata_filename))?;
@@ -104,9 +114,79 @@ fn process_icons(
                 name_pascal: icon_name_pascal,
                 url,
                 deprecated,
+                svg: icon_svg_definition,
             })
         })
         .collect()
+}
+
+fn process_icons_svg(tree: &Tree) -> definition::Svg {
+    let size = tree.size();
+    let width = size.width();
+    let height = size.height();
+    if width != height {
+        eprintln!(
+            "{}",
+            format!(
+                "Warning: SVG icon is not square (width: {}, height: {})",
+                width, height
+            )
+            .yellow()
+        );
+    }
+    let size = width;
+    let mut paths: Vec<definition::Path> = Vec::new();
+
+    tree.root().children().iter().for_each(|node| {
+        if let Node::Path(path) = node {
+            let data = path.data();
+            let path_bounding_box = path.abs_stroke_bounding_box();
+            let x_scale = path_bounding_box.x() / width;
+            let y_scale = path_bounding_box.y() / height;
+            let width_scale = path_bounding_box.width() / width;
+            let height_scale = path_bounding_box.height() / height;
+            let commands = path_segments_to_str(data).unwrap();
+            paths.push(definition::Path {
+                x_scale,
+                y_scale,
+                width_scale,
+                height_scale,
+                commands,
+            });
+        }
+    });
+
+    let svg = definition::Svg { size, paths };
+
+    svg
+}
+
+fn path_segments_to_str(
+    data: &usvg::tiny_skia_path::Path,
+) -> Result<String, std::fmt::Error> {
+    let mut s = String::new();
+    for segment in data.segments() {
+        match segment {
+            PathSegment::MoveTo(p) => {
+                s.write_fmt(format_args!("M {} {} ", p.x, p.y))?
+            }
+            PathSegment::LineTo(p) => {
+                s.write_fmt(format_args!("L {} {} ", p.x, p.y))?
+            }
+            PathSegment::QuadTo(p0, p1) => s.write_fmt(format_args!(
+                "Q {} {} {} {} ",
+                p0.x, p0.y, p1.x, p1.y
+            ))?,
+            PathSegment::CubicTo(p0, p1, p2) => s.write_fmt(format_args!(
+                "C {} {} {} {} {} {} ",
+                p0.x, p0.y, p1.x, p1.y, p2.x, p2.y
+            ))?,
+            PathSegment::Close => s.write_fmt(format_args!("Z "))?,
+        }
+    }
+    s.pop();
+
+    Ok(s)
 }
 
 fn generate_slint_file(
