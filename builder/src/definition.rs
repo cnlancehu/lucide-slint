@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize)]
 pub struct Icon {
     pub name_pascal: String,
-    pub url: String,
     pub deprecated: bool,
     pub svg: Svg,
 }
@@ -16,10 +15,10 @@ pub struct Svg {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Path {
-    pub x_scale: f32,
-    pub y_scale: f32,
-    pub width_scale: f32,
-    pub height_scale: f32,
+    pub viewbox_x: f32,
+    pub viewbox_y: f32,
+    pub viewbox_width: f32,
+    pub viewbox_height: f32,
     pub commands: String,
 }
 

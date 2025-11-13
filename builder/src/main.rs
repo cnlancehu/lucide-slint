@@ -6,7 +6,7 @@ use std::{
 
 use cnxt::Colorize;
 use tera::{Context, Tera};
-use usvg::{Node, Options, Tree, WriteOptions, tiny_skia_path::PathSegment};
+use usvg::{Node, Options, Tree, tiny_skia_path::PathSegment};
 
 use crate::definition::IconMetadata;
 
@@ -33,14 +33,14 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     fs::create_dir_all(&icons_target_dir_path)?;
 
     let icon_names = read_icon_names(&icons_dir_path)?;
-    let icons =
-        process_icons(&icons_dir_path, &icons_target_dir_path, icon_names)?;
+    let icons = process_icons(&icons_dir_path, icon_names)?;
 
     generate_slint_file(&template, &target_dir_path, &icons)?;
 
     println!(
         "{}",
-        format!("Successfully generated {} icons", icons.len()).bright_green()
+        format!("Successfully transformed {} icons", icons.len())
+            .bright_green()
     );
     Ok(())
 }
@@ -76,7 +76,6 @@ fn read_icon_names(
 
 fn process_icons(
     icons_dir_path: &Path,
-    icons_target_dir_path: &Path,
     icon_names: Vec<String>,
 ) -> Result<Vec<definition::Icon>, Box<dyn std::error::Error>> {
     icon_names
@@ -86,7 +85,6 @@ fn process_icons(
                 format!("{}Icon", to_pascal_case(&icon_name));
             let icon_raw_svg_filename = format!("{}.svg", &icon_name);
             let icon_metadata_filename = format!("{}.json", &icon_name);
-            let url = format!("icons/{}", &icon_raw_svg_filename);
             let icon_raw_svg = fs::read_to_string(
                 icons_dir_path.join(&icon_raw_svg_filename),
             )?;
@@ -94,25 +92,14 @@ fn process_icons(
                 usvg::Tree::from_str(&icon_raw_svg, &Options::default())?;
             let icon_svg_definition = process_icons_svg(&icon_svg_tree);
 
-            let icon_raw_svg = icon_svg_tree.to_string(&WriteOptions {
-                indent: usvg::Indent::None,
-                ..Default::default()
-            });
-
             let icon_metadata =
                 fs::read(icons_dir_path.join(icon_metadata_filename))?;
             let icon_metadata: IconMetadata =
                 serde_json::from_slice(&icon_metadata)?;
             let deprecated = icon_metadata.deprecated;
 
-            fs::write(
-                icons_target_dir_path.join(&icon_raw_svg_filename),
-                &icon_raw_svg,
-            )?;
-
             Ok(definition::Icon {
                 name_pascal: icon_name_pascal,
-                url,
                 deprecated,
                 svg: icon_svg_definition,
             })
@@ -140,25 +127,23 @@ fn process_icons_svg(tree: &Tree) -> definition::Svg {
     tree.root().children().iter().for_each(|node| {
         if let Node::Path(path) = node {
             let data = path.data();
-            let path_bounding_box = path.abs_stroke_bounding_box();
-            let x_scale = path_bounding_box.x() / width;
-            let y_scale = path_bounding_box.y() / height;
-            let width_scale = path_bounding_box.width() / width;
-            let height_scale = path_bounding_box.height() / height;
+            let path_bounding_box = path.abs_bounding_box();
+            let viewbox_x = -path_bounding_box.left() / size;
+            let viewbox_y = -path_bounding_box.top() / size;
+            let viewbox_width = width + viewbox_x.abs();
+            let viewbox_height = height + viewbox_y.abs();
             let commands = path_segments_to_str(data).unwrap();
             paths.push(definition::Path {
-                x_scale,
-                y_scale,
-                width_scale,
-                height_scale,
+                viewbox_x,
+                viewbox_y,
+                viewbox_width,
+                viewbox_height,
                 commands,
             });
         }
     });
 
-    let svg = definition::Svg { size, paths };
-
-    svg
+    definition::Svg { size, paths }
 }
 
 fn path_segments_to_str(

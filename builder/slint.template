@@ -5,19 +5,24 @@
 export component {{ icon.name_pascal }} inherits Rectangle {
     in-out property <brush> stroke: #ffffff;
     in-out property <length> size: {{ icon.svg.size }}px;
+    in-out property <float> stroke-width: 2;
     width: size;
     height: size;
     clip: false;
     {% for path in icon.svg.paths %}
     Path {
-        x: {{ path.x_scale }} * parent.size;
-        y:  {{ path.y_scale }} * parent.size;
-        width: {{ path.width_scale }} * parent.size;
-        height: {{ path.height_scale }} * parent.size;
+        x: 0;
+        y: 0;
+
+        viewbox-x: {{ path.viewbox_x }};
+        viewbox-y: {{  path.viewbox_y }};
+        viewbox-width: {{ path.viewbox_width }};
+        viewbox-height: {{ path.viewbox_height }};
+
         commands: "{{ path.commands }}";
 
         stroke: parent.stroke;
-        stroke-width: parent.width / 12;
+        stroke-width: parent.size / 24 * parent.stroke-width;
         stroke-line-cap: round;
         // stroke-line-join: round;
     }
@@ -25,10 +30,3 @@ export component {{ icon.name_pascal }} inherits Rectangle {
 }
 
 {% endfor %}
-
-export global Icons {
-    {% for icon in icons %}
-    /// {{ icon.name_pascal }}
-    out property <image> {{ icon.name_pascal }}: @image-url("{{ icon.url }}");
-    {% endfor %}
-}
