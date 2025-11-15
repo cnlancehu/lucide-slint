@@ -17,18 +17,22 @@
   <a href="https://docs.rs/lucide-slint/">Documentation</a>
 </p>
 
-# Lucide Slint
-Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for Slint.
+## Lucide Slint
+Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for [Slint](https://github.com/slint-ui/slint).
 
-# Status
-We're working on making icons available as `Path` elements inheriting from `Rectangle` in future releases for better performance, GPU acceleration, and reduced memory usage.
+**SVG-free !!!**
 
-The implementation is complete and awaiting the merge of a [pending PR](https://github.com/slint-ui/slint/pull/9912) into the latest Slint version.
+All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating the overhead of runtime SVG rendering and reducing memory and CPU usage.
 
-Once merged, we'll release a new version of `lucide-slint`.
+## ⚠️ Notice
 
+**Lucide Slint 0.2.0** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
 
-# Installation
+For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates/lucide-slint/0.1.4)** and refer to its [documentation](https://docs.rs/lucide-slint/0.1.4/lucide_slint/).
+
+**Lucide Slint 0.2.0** depends on features introduced in [this PR](https://github.com/slint-ui/slint/pull/9912), which is not yet released in the stable version.
+
+## Installation
 In an existing Slint project, run the following command to add lucide-slint as a **build** dependency:
 
 ```bash
@@ -43,72 +47,86 @@ use std::{collections::HashMap, path::PathBuf};
 fn main() {
     let library = HashMap::from([(
         "lucide".to_string(),
-        PathBuf::from(lucide_slint::get_slint_file_path().to_string()),
+        PathBuf::from(lucide_slint::lib()),
     )]);
-    let config = slint_build::CompilerConfiguration::new().with_library_paths(library);
+    let config = slint_build::CompilerConfiguration::new()
+        .with_library_paths(library);
 
     // Specify your Slint code entry here
-    slint_build::compile_with_config("ui/main.slint", config).expect("Slint build failed");
+    slint_build::compile_with_config("ui/main.slint", config)
+        .expect("Slint build failed");
 }
 ```
 
-# Usage
+## Usage
 Then you can use lucide icons in your Slint files like this:
 
+<image align="right" src="./assets/example1.webp" width="20%" />
+
+<!-- example 1 -->
 ```slint
 import { PlayIcon } from "@lucide";
 
 export component App inherits Window {
-    VerticalBox {
-        PlayIcon {
-            size: 24px;
-            colorize: #fff;
-        }
+    PlayIcon {
+        stroke: #5E72E4;    // set the stroke color
+        size: 48px;         // set the icon size
+        stroke-width: 2;    // set the stroke width
     }
 }
 ```
 
-The Icon component inherits an [`Image element`](https://docs.slint.dev/latest/docs/slint/reference/elements/image/), so you can set properties like `vertical-tiling`, `width`, etc.
 
+Or, you could just use icons with default `size`, `stroke` and `stroke-width`:
+
+<image align="right" src="./assets/example2.webp" width="20%" />
+
+<!-- example 2 -->
 ```slint
-import { FlowerIcon } from "@lucide";
+import { Columns3CogIcon } from "@lucide";
 
-FlowerIcon {
-    size: 36px;
-    width: 100%;
-    height: 100%;
-    opacity: 0.7;
-    vertical-tiling: round;
-    horizontal-tiling: round;
-}
+Columns3CogIcon { }
 ```
 
-Or if you just want to use the raw [image](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#image) data, you can access the icon via `Icons`:
+Modify the default values:
+
+<image align="right" src="./assets/example3.webp" width="20%" />
 
 ```slint
-import { Icons } from "@lucide";
+import { PlayIcon, IconSettings } from "@lucide";
 
-Button {
-    text: "Back";
-    icon: Icons.ArrowLeftIcon;
-    colorize-icon: true;
+init => {
+    IconSettings.default-stroke = #2dce89;
+    IconSettings.default-size = 48px;
+    IconSettings.default-stroke-width = 1.0;
 }
-
-// equivalent to
-Button {
-    text: "Back";
-    icon: @image-url("icons/arrow-left.svg"); // The path is actually relative to the lucide-slint package, use `Icons.ArrowLeftIcon` instead.
-    colorize-icon: true;
-}
+PlayIcon { }
 ```
 
-# Available Icons
+## Reference
+### Icon Properties
+All icons have the following properties:
+
+| Property       | Type                                                                                 | Description                  | Default |
+| -------------- | ------------------------------------------------------------------------------------ | ---------------------------- | ------- |
+| `size`         | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon         | `24px`  |
+| `stroke`       | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon | `white` |
+| `stroke-width` | float  (unit: px)                                                                    | The stroke width of the icon | `2`     |
+
+### Icon Out properties
+All icons have the following out properties:
+
+| Property                  | Type                                                                                 | Description                                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `calculated-stroke-width` | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The real stroke width of the icon calculated according to the `stroke-width` and `size` property |
+
+## Available Icons
 
 For a complete list of available icons, visit the [Lucide Icons](https://lucide.dev/icons/) website.
 
 To use an icon in Slint:
-1. Find your desired icon (e.g., `a-arrow-down`)
-2. Click **Copy Component Name** to get the PascalCase name (e.g., `AArrowDown`)
+1. Find your desired icon: `a-arrow-down`
+2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
 ![Copy Component Name](./assets/copy-component-name.png)
 3. Append `Icon` to the component name: `AArrowDownIcon`
 
@@ -120,7 +138,5 @@ import { AArrowDownIcon } from "@lucide";
 AArrowDownIcon { }
 ```
 
-# License
-This project is licensed under the MIT License, while Lucide is licensed under the ISC License.
-
-See [LICENSE](./LICENSE) for more details.
+## License
+This project is licensed under the MIT License, while Lucide is licensed under [the ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).

@@ -4,12 +4,6 @@ use serde::{Deserialize, Serialize};
 pub struct Icon {
     pub name_pascal: String,
     pub deprecated: bool,
-    pub svg: Svg,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Svg {
-    pub size: f32,
     pub paths: Vec<Path>,
 }
 

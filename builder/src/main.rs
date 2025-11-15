@@ -90,7 +90,7 @@ fn process_icons(
             )?;
             let icon_svg_tree =
                 usvg::Tree::from_str(&icon_raw_svg, &Options::default())?;
-            let icon_svg_definition = process_icons_svg(&icon_svg_tree);
+            let paths = process_icons_svg(&icon_svg_tree);
 
             let icon_metadata =
                 fs::read(icons_dir_path.join(icon_metadata_filename))?;
@@ -101,13 +101,13 @@ fn process_icons(
             Ok(definition::Icon {
                 name_pascal: icon_name_pascal,
                 deprecated,
-                svg: icon_svg_definition,
+                paths,
             })
         })
         .collect()
 }
 
-fn process_icons_svg(tree: &Tree) -> definition::Svg {
+fn process_icons_svg(tree: &Tree) -> Vec<definition::Path> {
     let size = tree.size();
     let width = size.width();
     let height = size.height();
@@ -143,7 +143,7 @@ fn process_icons_svg(tree: &Tree) -> definition::Svg {
         }
     });
 
-    definition::Svg { size, paths }
+    paths
 }
 
 fn path_segments_to_str(
