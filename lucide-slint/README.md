@@ -17,7 +17,9 @@
 ## Lucide Slint
 Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for [Slint](https://github.com/slint-ui/slint).
 
-**SVG-free !!!**
+Use lucide icons in your Slint applications with ease!
+
+**SVG-free!**
 
 All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating the overhead of runtime SVG ering and reducing memory and CPU usage.
 
@@ -25,7 +27,7 @@ All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/late
 
 **Lucide Slint 0.2.0** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
 
-For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates/lucide-slint/0.1.4)** and refer to its [documentation](https://docs.rs/de-slint/0.1.4/lucide_slint/).
+For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates/lucide-slint/0.1.4)** and refer to its [documentation](https://docs.rs/lucide-slint/0.1.4/lucide_slint/).
 
 **Lucide Slint 0.2.0** depends on features introduced in [this PR](https://github.com/slint-ui/slint/pull/9912), which is not yet released in the stable version.
 

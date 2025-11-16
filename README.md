@@ -20,7 +20,9 @@
 ## Lucide Slint
 Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide) for [Slint](https://github.com/slint-ui/slint).
 
-**SVG-free !!!**
+Use lucide icons in your Slint applications with ease!
+
+**SVG-free!**
 
 All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating the overhead of runtime SVG rendering and reducing memory and CPU usage.
 
