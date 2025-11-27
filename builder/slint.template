@@ -1,16 +1,20 @@
 export global IconSettings {
     in-out property <brush> default-stroke: #fff;
+    in-out property <brush> default-stroke-fill: transparent;
     in-out property <length> default-size: 24px;
     in-out property <float> default-stroke-width: 2;
+    in-out property <bool> default-absolute-stroke-width: false;
 }
 
 {% for icon in icons %}
 /// {{ icon.name_pascal }}{% if icon.deprecated %} (DEPRECATED){% endif %}
 export component {{ icon.name_pascal }} inherits Rectangle {
     in-out property <brush> stroke: IconSettings.default-stroke;
+    in-out property <brush> stroke-fill: IconSettings.default-stroke-fill;
     in-out property <length> size: IconSettings.default-size;
     in-out property <float> stroke-width: IconSettings.default-stroke-width;
-    out property <length> calculated-stroke-width: size / 24 * stroke-width;
+    in-out property <bool> absolute-stroke-width: IconSettings.default-absolute-stroke-width;
+    out property <length> calculated-stroke-width: absolute-stroke-width ? (stroke-width * 1px) : (size / 24 * stroke-width);
 
     width: size;
     height: size;
@@ -28,6 +32,7 @@ export component {{ icon.name_pascal }} inherits Rectangle {
         commands: "{{ path.commands }}";
 
         stroke: parent.stroke;
+        fill: parent.stroke-fill;
         stroke-width: parent.calculated-stroke-width;
         stroke-line-cap: round;
         stroke-line-join: round;

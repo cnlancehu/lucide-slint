@@ -22,9 +22,16 @@ Implementation of the [lucide icon library](https://github.com/lucide-icons/luci
 
 Use lucide icons in your Slint applications with ease!
 
-**SVG-free!**
+## Features
 
-All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating the overhead of runtime SVG rendering and reducing memory and CPU usage.
+**🚀 Optimized Performance**
+
+All icons are pre-converted to [Path element](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating runtime SVG parsing overhead for better performance and reduced memory footprint.
+
+**🎨 Full Property Support**
+
+All configuration properties from the official Lucide package are supported, giving you complete control over icon appearance.
+
 
 ## ⚠️ Notice
 
@@ -101,19 +108,25 @@ init => {
     IconSettings.default-stroke = #2dce89;
     IconSettings.default-size = 48px;
     IconSettings.default-stroke-width = 1.0;
+    IconSettings.default-stroke-fill = transparent;
+    IconSettings.default-absolute-stroke-width = false;
 }
 PlayIcon { }
 ```
 
 ## Reference
 ### Icon Properties
+These properties align with the standard Lucide icon configuration.
+
 All icons have the following properties:
 
-| Property       | Type                                                                                 | Description                  | Default |
-| -------------- | ------------------------------------------------------------------------------------ | ---------------------------- | ------- |
-| `size`         | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon         | `24px`  |
-| `stroke`       | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon | `white` |
-| `stroke-width` | float  (unit: px)                                                                    | The stroke width of the icon | `2`     |
+| Property                | Type                                                                                 | Description                                                                    | Default       | Reference                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------- |
+| `size`                  | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon                                                           | `24px`        | [Sizing](https://lucide.dev/guide/basics/sizing)                                            |
+| `stroke`                | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon                                                   | `white`       | [Color](https://lucide.dev/guide/basics/color)                                              |
+| `stroke-fill`           | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke fill color of the icon                                              | `transparent` | [Filled Icons](https://lucide.dev/guide/advanced/filled-icons)                              |
+| `stroke-width`          | float  (unit: px)                                                                    | The stroke width of the icon                                                   | `2`           | [Stroke width](https://lucide.dev/guide/basics/stroke-width#stroke-width)                   |
+| `absolute-stroke-width` | bool                                                                                 | Whether the size of the stroke width will be relative to the size of the icon. | `false`       | [Absolute stroke width](https://lucide.dev/guide/basics/stroke-width#absolute-stroke-width) |
 
 ### Icon Out properties
 All icons have the following out properties:
