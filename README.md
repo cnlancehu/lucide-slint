@@ -32,7 +32,6 @@ All icons are pre-converted to [Path element](https://docs.slint.dev/latest/docs
 
 All configuration properties from the official Lucide package are supported, giving you complete control over icon appearance.
 
-
 ## ⚠️ Notice
 
 **Lucide Slint 0.2.0** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
@@ -131,9 +130,9 @@ All icons have the following properties:
 ### Icon Out properties
 All icons have the following out properties:
 
-| Property                  | Type                                                                                 | Description                                                                                      |
-| ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `calculated-stroke-width` | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The real stroke width of the icon calculated according to the `stroke-width` and `size` property |
+| Property                  | Type                                                                                 | Description                                                                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `calculated-stroke-width` | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The real stroke width of the icon calculated according to the `stroke-width`, `size` and `absolute-stroke-width` property |
 
 ## Available Icons
 

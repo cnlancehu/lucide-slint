@@ -5,7 +5,10 @@ edition = "2024"
 
 [dependencies]
 cnxt = "0.1.6"
+duct = "1.1.1"
+reqwest = { version = "0.12.24", features = ["blocking", "json"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.145"
 tera = "1.20.0"
+toml_edit = "0.23.7"
 usvg = "0.45.1"
