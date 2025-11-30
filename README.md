@@ -152,5 +152,11 @@ import { AArrowDownIcon } from "@lucide";
 AArrowDownIcon { }
 ```
 
+## [**Try it in SlintPad**](https://snapshots.slint.dev/master/editor/?lib=lucide%3Dhttps%3A%2F%2Fpkg.lance.fun%2Fgo%2Flucide-slint%2Fnext%2Flib.slint&gz=H4sIAAAAAAAACnVQwWrDMAy95ytEx2CDJvV2WhM6ythl58DuXiynYo6d2QoLK_n34bQrScl0MPLT89Pzo6Z1nuEI7-iZKmleXA8DaO8aWAVW6TepGjlkwZDlVZHQ34PyqyPv0bxVzq6hZOlPXTxLZCZbh4vS3nQVKVwVSYL9KFC5pnUWLcMrNg6OCQDMTJyQWGSJYfc8QWJN92QKtewMp4F-EHbwIETbF7DZQIkMfEA4E4AqZ2FksTvRLqLDpZt-7WprYO8-MYcbrXWxMIl58SGHx_lQfgRnOsZ0ztLSBCyWHJzj_Gc7e2lDKz1aXjShyZgc9oYsSp_WXipCy3dbobBeR-9KbhWITIjb8fpUCRHTiMD9tZ8hGZJfUcN6DycCAAA%3D)
+
+![screenshot](./assets/try-it-in-slintpad.webp)
+
+Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease.
+
 ## License
 This project is licensed under the MIT License, while Lucide is licensed under [the ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).

@@ -7,7 +7,7 @@ export global IconSettings {
 }
 
 {% for icon in icons %}
-/// {{ icon.name_pascal }}{% if icon.deprecated %} (DEPRECATED){% endif %}
+// {{ icon.name_pascal }}{% if icon.deprecated %} (DEPRECATED){% endif %}
 export component {{ icon.name_pascal }} inherits Rectangle {
     in-out property <brush> stroke: IconSettings.default-stroke;
     in-out property <brush> stroke-fill: IconSettings.default-stroke-fill;
