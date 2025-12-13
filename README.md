@@ -34,7 +34,7 @@ All configuration properties from the official Lucide package are supported, giv
 
 ## ⚠️ Notice
 
-**Lucide Slint 0.2.0** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
+**Lucide Slint 0.2.0 and later** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
 
 For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates/lucide-slint/0.1.4)** and refer to its [documentation](https://docs.rs/lucide-slint/0.1.4/lucide_slint/).
 
@@ -141,7 +141,7 @@ For a complete list of available icons, visit the [Lucide Icons](https://lucide.
 To use an icon in Slint:
 1. Find your desired icon: `a-arrow-down`
 2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
-![Copy Component Name](./assets/copy-component-name.png)
+   ![Copy Component Name](./assets/copy-component-name.png)
 3. Append `Icon` to the component name: `AArrowDownIcon`
 
 **Example:**

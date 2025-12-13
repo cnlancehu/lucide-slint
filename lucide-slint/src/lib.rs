@@ -19,13 +19,19 @@
 //!
 //! Use lucide icons in your Slint applications with ease!
 //!
-//! **SVG-free!**
+//! ## Features
 //!
-//! All icons are pre-converted to [Slint Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating the overhead of runtime SVG rendering and reducing memory and CPU usage.
+//! **🚀 Optimized Performance**
+//!
+//! All icons are pre-converted to [Path element](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating runtime SVG parsing overhead for better performance and reduced memory footprint.
+//!
+//! **🎨 Full Property Support**
+//!
+//! All configuration properties from the official Lucide package are supported, giving you complete control over icon appearance.
 //!
 //! ## ⚠️ Notice
 //!
-//! **Lucide Slint 0.2.0** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
+//! **Lucide Slint 0.2.0 and later** requires **Slint 1.15+** (will be released in the future) or the [master branch](https://github.com/slint-ui/slint/tree/master).
 //!
 //! For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates/lucide-slint/0.1.4)** and refer to its [documentation](https://docs.rs/lucide-slint/0.1.4/lucide_slint/).
 //!
@@ -98,26 +104,32 @@
 //!     IconSettings.default-stroke = #2dce89;
 //!     IconSettings.default-size = 48px;
 //!     IconSettings.default-stroke-width = 1.0;
+//!     IconSettings.default-stroke-fill = transparent;
+//!     IconSettings.default-absolute-stroke-width = false;
 //! }
 //! PlayIcon { }
 //! ```
 //!
 //! ## Reference
 //! ### Icon Properties
+//! These properties align with the standard Lucide icon configuration.
+//!
 //! All icons have the following properties:
 //!
-//! | Property       | Type                                                                                 | Description                  | Default |
-//! | -------------- | ------------------------------------------------------------------------------------ | ---------------------------- | ------- |
-//! | `size`         | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon         | `24px`  |
-//! | `stroke`       | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon | `white` |
-//! | `stroke-width` | float  (unit: px)                                                                    | The stroke width of the icon | `2`     |
+//! | Property                | Type                                                                                 | Description                                                                    | Default       | Reference                                                                                   |
+//! | ----------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------- |
+//! | `size`                  | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon                                                           | `24px`        | [Sizing](https://lucide.dev/guide/basics/sizing)                                            |
+//! | `stroke`                | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon                                                   | `white`       | [Color](https://lucide.dev/guide/basics/color)                                              |
+//! | `stroke-fill`           | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke fill color of the icon                                              | `transparent` | [Filled Icons](https://lucide.dev/guide/advanced/filled-icons)                              |
+//! | `stroke-width`          | float  (unit: px)                                                                    | The stroke width of the icon                                                   | `2`           | [Stroke width](https://lucide.dev/guide/basics/stroke-width#stroke-width)                   |
+//! | `absolute-stroke-width` | bool                                                                                 | Whether the size of the stroke width will be relative to the size of the icon. | `false`       | [Absolute stroke width](https://lucide.dev/guide/basics/stroke-width#absolute-stroke-width) |
 //!
 //! ### Icon Out properties
 //! All icons have the following out properties:
 //!
-//! | Property                  | Type                                                                                 | Description                                                                                      |
-//! | ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-//! | `calculated-stroke-width` | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The real stroke width of the icon calculated according to the `stroke-width` and `size` property |
+//! | Property                  | Type                                                                                 | Description                                                                                                               |
+//! | ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+//! | `calculated-stroke-width` | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The real stroke width of the icon calculated according to the `stroke-width`, `size` and `absolute-stroke-width` property |
 //!
 //! ## Available Icons
 //!
@@ -126,7 +138,7 @@
 //! To use an icon in Slint:
 //! 1. Find your desired icon: `a-arrow-down`
 //! 2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
-//! ![Copy Component Name](https://github.com/cnlancehu/lucide-slint/raw/main/assets/copy-component-name.png)
+//!    ![Copy Component Name](./assets/copy-component-name.png)
 //! 3. Append `Icon` to the component name: `AArrowDownIcon`
 //!
 //! **Example:**
@@ -136,6 +148,12 @@
 //!
 //! AArrowDownIcon { }
 //! ```
+//!
+//! ## [**Try it in SlintPad**](https://snapshots.slint.dev/master/editor/?lib=lucide%3Dhttps%3A%2F%2Fpkg.lance.fun%2Fgo%2Flucide-slint%2Fnext%2Flib.slint&gz=H4sIAAAAAAAACnVQwWrDMAy95ytEx2CDJvV2WhM6ythl58DuXiynYo6d2QoLK_n34bQrScl0MPLT89Pzo6Z1nuEI7-iZKmleXA8DaO8aWAVW6TepGjlkwZDlVZHQ34PyqyPv0bxVzq6hZOlPXTxLZCZbh4vS3nQVKVwVSYL9KFC5pnUWLcMrNg6OCQDMTJyQWGSJYfc8QWJN92QKtewMp4F-EHbwIETbF7DZQIkMfEA4E4AqZ2FksTvRLqLDpZt-7WprYO8-MYcbrXWxMIl58SGHx_lQfgRnOsZ0ztLSBCyWHJzj_Gc7e2lDKz1aXjShyZgc9oYsSp_WXipCy3dbobBeR-9KbhWITIjb8fpUCRHTiMD9tZ8hGZJfUcN6DycCAAA%3D)
+//!
+//! ![screenshot](https://github.com/cnlancehu/lucide-slint/raw/main/assets/try-it-in-slintpad.webp)
+//!
+//! Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease.
 
 /// Returns the file path to the `lib.slint` file included in this crate.
 ///

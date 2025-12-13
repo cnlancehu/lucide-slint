@@ -1,0 +1,16 @@
+{
+  "name": "svgoptimize",
+  "version": "0.0.0",
+  "description": "Svg optimize for lucide-slint.",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "author": "Lance <me@lance.fun>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.0",
+  "dependencies": {
+    "svgo": "^4.0.0"
+  }
+}

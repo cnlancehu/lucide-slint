@@ -5,8 +5,9 @@ use std::{
 };
 
 use cnxt::Colorize;
+use duct::cmd;
 use tera::{Context, Tera};
-use usvg::{Node, Options, Tree, tiny_skia_path::PathSegment};
+use usvg::{Node, Options, Tree, WriteOptions, tiny_skia_path::PathSegment};
 
 use crate::definition::{self, IconMetadata};
 
@@ -15,16 +16,17 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     template.add_raw_template("slint", include_str!("../slint.template"))?;
 
     let icons_dir_path = PathBuf::from("lucide/icons");
+    let icons_process_dir_path = PathBuf::from("temp");
     let target_dir_path = PathBuf::from("lucide-slint");
-    let icons_target_dir_path = target_dir_path.join("icons");
-    let _ = fs::remove_dir_all(&icons_target_dir_path);
-    fs::create_dir_all(&icons_target_dir_path)?;
 
-    // Create target directory if it doesn't exist
-    fs::create_dir_all(&icons_target_dir_path)?;
+    let _ = fs::remove_dir_all(&icons_process_dir_path);
+    fs::create_dir_all(&icons_process_dir_path)?;
 
-    let icon_names = read_icon_names(&icons_dir_path)?;
-    let icons = process_icons(&icons_dir_path, icon_names)?;
+    preprocess_icons_svg(&icons_dir_path, &icons_process_dir_path)?;
+
+    let icon_names = read_icon_names(&icons_process_dir_path)?;
+    let icons =
+        process_icons(&icons_dir_path, &icons_process_dir_path, icon_names)?;
 
     generate_slint_file(&template, &target_dir_path, &icons)?;
 
@@ -65,8 +67,38 @@ fn read_icon_names(
     Ok(icon_names)
 }
 
+fn preprocess_icons_svg(
+    icons_dir_path: &Path,
+    icons_process_dir_path: &Path,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let icons_dir = fs::read_dir(icons_dir_path)?;
+    for entry in icons_dir {
+        let entry = entry?;
+        let file_name = entry.file_name();
+        let file_name_str = file_name.to_string_lossy();
+
+        if file_name_str.ends_with(".svg") {
+            let svg_content = fs::read_to_string(entry.path())?;
+
+            let optimized_svg_content =
+                usvg::Tree::from_str(&svg_content, &Options::default())?;
+
+            let output_path = icons_process_dir_path.join(&file_name);
+            fs::write(
+                output_path,
+                optimized_svg_content.to_string(&WriteOptions::default()),
+            )?;
+        }
+    }
+
+    cmd!("pnpm.cmd", "start").dir("svgoptimize").run()?;
+
+    Ok(())
+}
+
 fn process_icons(
     icons_dir_path: &Path,
+    icons_process_dir_path: &Path,
     icon_names: Vec<String>,
 ) -> Result<Vec<definition::Icon>, Box<dyn std::error::Error>> {
     icon_names
@@ -77,11 +109,22 @@ fn process_icons(
             let icon_raw_svg_filename = format!("{}.svg", &icon_name);
             let icon_metadata_filename = format!("{}.json", &icon_name);
             let icon_raw_svg = fs::read_to_string(
-                icons_dir_path.join(&icon_raw_svg_filename),
+                icons_process_dir_path.join(&icon_raw_svg_filename),
             )?;
             let icon_svg_tree =
                 Tree::from_str(&icon_raw_svg, &Options::default())?;
             let paths = process_icons_svg(&icon_svg_tree);
+            if paths.len() > 1 {
+                println!(
+                    "{}",
+                    format!(
+                        "Warning: Icon '{}' has multiple paths ({} paths)",
+                        icon_name,
+                        paths.len()
+                    )
+                    .yellow()
+                );
+            }
 
             let icon_metadata =
                 fs::read(icons_dir_path.join(icon_metadata_filename))?;
