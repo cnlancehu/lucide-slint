@@ -24,6 +24,18 @@ struct TagRef {
     object: TagRefObject,
 }
 
+#[derive(Debug, Deserialize)]
+struct GitTagObject {
+    #[serde(rename = "type")]
+    object_type: String,
+    sha: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct GitTag {
+    object: GitTagObject,
+}
+
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     let client = reqwest::blocking::ClientBuilder::new()
         .user_agent(USER_AGENT)
@@ -39,9 +51,43 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     );
     let tag_res = client.get(&tag_ref_url).send()?;
     let tag_ref: TagRef = tag_res.json()?;
-    let commit_id = tag_ref.object.sha;
+
+    // The ref may point to an annotated tag object; dereference until we reach a commit.
+    let mut commit_id = tag_ref.object.sha;
+    loop {
+        let tag_obj_url = format!(
+            "https://api.github.com/repos/lucide-icons/lucide/git/tags/{}",
+            commit_id
+        );
+        let tag_obj_res = client.get(&tag_obj_url).send()?;
+
+        // If this isn't a tag object (e.g. it's already a commit SHA), stop dereferencing.
+        if !tag_obj_res.status().is_success() {
+            break;
+        }
+
+        let tag_obj: GitTag = tag_obj_res.json()?;
+        if tag_obj.object.object_type == "commit" {
+            commit_id = tag_obj.object.sha;
+            break;
+        }
+
+        // Nested annotated tag
+        commit_id = tag_obj.object.sha;
+    }
 
     cmd!("git", "submodule", "update", "--init", "--recursive").run()?;
+    cmd!(
+        "git",
+        "-C",
+        SUBMODULE_NAME,
+        "fetch",
+        "--tags",
+        "--force",
+        "--prune",
+        "origin"
+    )
+    .run()?;
     cmd!("git", "-C", SUBMODULE_NAME, "checkout", &commit_id).run()?;
 
     println!(
