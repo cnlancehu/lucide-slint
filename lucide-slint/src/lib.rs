@@ -138,7 +138,7 @@
 //! To use an icon in Slint:
 //! 1. Find your desired icon: `a-arrow-down`
 //! 2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
-//!    ![Copy Component Name](./assets/copy-component-name.png)
+//!    ![Copy Component Name](https://github.com/cnlancehu/lucide-slint/raw/main/assets/copy-component-name.png)
 //! 3. Append `Icon` to the component name: `AArrowDownIcon`
 //!
 //! **Example:**
