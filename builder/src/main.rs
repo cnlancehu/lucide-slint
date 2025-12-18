@@ -21,7 +21,7 @@ fn main() {
         }
         _ => {
             eprintln!("{}", "Usage: cargo run -- generate".red());
-            eprintln!("{}", "       cargo run -- update".red());
+            eprintln!("{}", "       cargo run -- publish".red());
             std::process::exit(1);
         }
     }
