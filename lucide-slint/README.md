@@ -38,6 +38,9 @@ For **Slint 1.14.x**, please use **Lucide Slint [0.1.4](https://crates.io/crates
 **Lucide Slint 0.2.0** depends on features introduced in [this PR](https://github.com/slint-ui/slint/pull/9912), which is not yet released in the stable version.
 
 ## Installation
+
+### Rust (Cargo)
+
 In an existing Slint project, run the following command to add lucide-slint as a **build** dependency:
 
 ```bash
@@ -50,17 +53,34 @@ Add the following to your `build.rs` file to import `lucide-slint` as a Slint li
 use std::{collections::HashMap, path::PathBuf};
 
 fn main() {
-    let library = HashMap::from([(
-        "lucide".to_string(),
-        PathBuf::from(lucide_slint::lib()),
-    )]);
-    let config = slint_build::CompilerConfiguration::new()
-        .with_library_paths(library);
+  let library = HashMap::from([(
+    "lucide".to_string(),
+    PathBuf::from(lucide_slint::lib()),
+  )]);
+  let config = slint_build::CompilerConfiguration::new()
+    .with_library_paths(library);
 
-    // Specify your Slint code entry here
-    slint_build::compile_with_config("ui/main.slint", config)
-        .expect("Slint build failed");
+  // Specify your Slint code entry here
+  slint_build::compile_with_config("ui/main.slint", config)
+    .expect("Slint build failed");
 }
+```
+
+### C++ (CMake)
+
+For C++ projects using CMake, append the following to your `CMakeLists.txt` file to download and register the lucide-slint library:
+
+```cmake
+# Download lucide-slint library
+set(LUCIDE_SLINT "${CMAKE_CURRENT_BINARY_DIR}/lucide.slint")
+if(NOT EXISTS "${LUCIDE_SLINT}")
+  file(DOWNLOAD "https://pkg.lance.fun/go/lucide-slint/latest/lib.slint" "${LUCIDE_SLINT}" SHOW_PROGRESS)
+endif()
+
+# Register the library path
+slint_target_sources(my_application ui/app-window.slint
+  LIBRARY_PATHS lucide=${LUCIDE_SLINT}
+)
 ```
 
 ## Usage
@@ -70,11 +90,12 @@ Then you can use lucide icons in your Slint files like this:
 
 <!-- example 1 -->
 ```slint
-import { PlayIcon } from "@lucide";
+import { IconDisplay, IconSet } from "@lucide";
 
-export component App inherits Window {
-    PlayIcon {
-        stroke: #5E72E4;    // set the stroke color
+export component Example {
+    IconDisplay {
+        icon: IconSet.Play; // set the icon to display
+        stroke: #5E72E4;  // set the stroke color
         size: 48px;         // set the icon size
         stroke-width: 2;    // set the stroke width
     }
@@ -88,36 +109,24 @@ Or, you could just use icons with default `size`, `stroke` and `stroke-width`:
 
 <!-- example 2 -->
 ```slint
-import { Columns3CogIcon } from "@lucide";
+import { IconDisplay, IconSet } from "@lucide";
 
-Columns3CogIcon { }
-```
-
-Modify the default values:
-
-<image align="right" src="https://github.com/cnlancehu/lucide-slint/raw/main/assets/example3.webp" width="20%" />
-
-```slint
-import { PlayIcon, IconSettings } from "@lucide";
-
-init => {
-    IconSettings.default-stroke = #2dce89;
-    IconSettings.default-size = 48px;
-    IconSettings.default-stroke-width = 1.0;
-    IconSettings.default-stroke-fill = transparent;
-    IconSettings.default-absolute-stroke-width = false;
+export component Example {
+    IconDisplay {
+        icon: IconSet.Columns3Cog;
+    }
 }
-PlayIcon { }
 ```
 
 ## Reference
 ### Icon Properties
 These properties align with the standard Lucide icon configuration.
 
-All icons have the following properties:
+`IconDisplay` has the following properties:
 
 | Property                | Type                                                                                 | Description                                                                    | Default       | Reference                                                                                   |
 | ----------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------- |
+| `icon`                  | Icon                                                                                 | The specific icon to display from the IconSet enum                             | -             | -                                                                                           |
 | `size`                  | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon                                                           | `24px`        | [Sizing](https://lucide.dev/guide/basics/sizing)                                            |
 | `stroke`                | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon                                                   | `white`       | [Color](https://lucide.dev/guide/basics/color)                                              |
 | `stroke-fill`           | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke fill color of the icon                                              | `transparent` | [Filled Icons](https://lucide.dev/guide/advanced/filled-icons)                              |
@@ -139,17 +148,20 @@ To use an icon in Slint:
 1. Find your desired icon: `a-arrow-down`
 2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
    ![Copy Component Name](https://github.com/cnlancehu/lucide-slint/raw/main/assets/copy-component-name.png)
-3. Append `Icon` to the component name: `AArrowDownIcon`
 
 **Example:**
 
 ```slint
-import { AArrowDownIcon } from "@lucide";
+import { IconDisplay, IconSet } from "@lucide";
 
-AArrowDownIcon { }
+export component Example {
+    IconDisplay {
+        icon: IconSet.AArrowDown;
+    }
+}
 ```
 
-## [**Try it in SlintPad**](https://snapshots.slint.dev/master/editor/?lib=lucide%3Dhttps%3A%2F%2Fpkg.lance.fun%2Fgo%2Flucide-slint%2Fnext%2Flib.slint&gz=H4sIAAAAAAAACnVQwWrDMAy95ytEx2CDJvV2WhM6ythl58DuXiynYo6d2QoLK_n34bQrScl0MPLT89Pzo6Z1nuEI7-iZKmleXA8DaO8aWAVW6TepGjlkwZDlVZHQ34PyqyPv0bxVzq6hZOlPXTxLZCZbh4vS3nQVKVwVSYL9KFC5pnUWLcMrNg6OCQDMTJyQWGSJYfc8QWJN92QKtewMp4F-EHbwIETbF7DZQIkMfEA4E4AqZ2FksTvRLqLDpZt-7WprYO8-MYcbrXWxMIl58SGHx_lQfgRnOsZ0ztLSBCyWHJzj_Gc7e2lDKz1aXjShyZgc9oYsSp_WXipCy3dbobBeR-9KbhWITIjb8fpUCRHTiMD9tZ8hGZJfUcN6DycCAAA%3D)
+## [**Try it in SlintPad**](https://snapshots.slint.dev/master/editor/?lib=lucide%3Dhttps%3A%2F%2Fpkg.lance.fun%2Fgo%2Flucide-slint%2Fnext%2Flib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA%3D)
 
 ![screenshot](https://github.com/cnlancehu/lucide-slint/raw/main/assets/try-it-in-slintpad.webp)
 
