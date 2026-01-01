@@ -1,42 +1,60 @@
-export global IconSettings {
-    in-out property <brush> default-stroke: #fff;
-    in-out property <brush> default-stroke-fill: transparent;
-    in-out property <length> default-size: 24px;
-    in-out property <float> default-stroke-width: 2;
-    in-out property <bool> default-absolute-stroke-width: false;
+export struct PathElem {
+    viewport-x: float,
+    viewport-y: float,
+    viewport-width: float,
+    viewport-height: float,
+
+    command: string,
+    has_fill: bool,
 }
 
-{% for icon in icons %}
-// {{ icon.name_pascal }}{% if icon.deprecated %} (DEPRECATED){% endif %}
-export component {{ icon.name_pascal }} inherits Rectangle {
-    in-out property <brush> stroke: IconSettings.default-stroke;
-    in-out property <brush> stroke-fill: IconSettings.default-stroke-fill;
-    in-out property <length> size: IconSettings.default-size;
-    in-out property <float> stroke-width: IconSettings.default-stroke-width;
-    in-out property <bool> absolute-stroke-width: IconSettings.default-absolute-stroke-width;
+export struct Icon {
+    paths: [PathElem],
+}
+
+export global IconSet {
+    {% for icon in icons %}
+    out property <Icon> {{ icon.name_pascal }}: {
+        paths: [
+            {% for path in icon.paths %}{
+                viewport-x: {{ path.viewbox_x }},
+                viewport-y: {{ path.viewbox_y }},
+                viewport-width: {{ path.viewbox_width }},
+                viewport-height: {{ path.viewbox_height }},
+
+                command: "{{ path.commands }}",
+                has_fill: {{ path.has_fill }},
+            }{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+    };
+    {% endfor %}
+}
+
+export component IconDisplay inherits Rectangle {
+    in property <Icon> icon;
+    in-out property <length> size: 24px;
+    in-out property <brush> stroke: #fff;
+    in-out property <brush> stroke-fill: transparent;
+    in-out property <float> stroke-width: 2.0;
+    in-out property <bool> absolute-stroke-width: false;
     out property <length> calculated-stroke-width: absolute-stroke-width ? (stroke-width * 1px) : (size / 24 * stroke-width);
 
     width: size;
     height: size;
     clip: false;
-    {% for path in icon.paths %}
-    Path {
+
+    for path in icon.paths: Path {
         x: 0;
         y: 0;
-
-        viewbox-x: {{ path.viewbox_x }};
-        viewbox-y: {{  path.viewbox_y }};
-        viewbox-width: {{ path.viewbox_width }};
-        viewbox-height: {{ path.viewbox_height }};
-
-        commands: "{{ path.commands }}";
-
+        viewbox-x: path.viewport-x;
+        viewbox-y: path.viewport-y;
+        viewbox-width: path.viewport-width;
+        viewbox-height: path.viewport-height;
+        commands: path.command;
         stroke: parent.stroke;
-        fill: parent.stroke-fill;
+        fill: path.has_fill ? parent.stroke : parent.stroke-fill;
         stroke-width: parent.calculated-stroke-width;
         stroke-line-cap: round;
         stroke-line-join: round;
     }
-    {% endfor %}
 }
-{% endfor %}

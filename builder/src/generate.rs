@@ -104,8 +104,7 @@ fn process_icons(
     icon_names
         .into_iter()
         .map(|icon_name| {
-            let icon_name_pascal =
-                format!("{}Icon", to_pascal_case(&icon_name));
+            let icon_name_pascal = to_pascal_case(&icon_name);
             let icon_raw_svg_filename = format!("{}.svg", &icon_name);
             let icon_metadata_filename = format!("{}.json", &icon_name);
             let icon_raw_svg = fs::read_to_string(
@@ -162,17 +161,20 @@ fn process_icons_svg(tree: &Tree) -> Vec<definition::Path> {
         if let Node::Path(path) = node {
             let data = path.data();
             let path_bounding_box = path.abs_bounding_box();
+
             let viewbox_x = -path_bounding_box.left() / size;
             let viewbox_y = -path_bounding_box.top() / size;
             let viewbox_width = width + viewbox_x.abs();
             let viewbox_height = height + viewbox_y.abs();
             let commands = path_segments_to_str(data).unwrap();
+            let has_fill = path.fill().is_some();
             paths.push(definition::Path {
                 viewbox_x,
                 viewbox_y,
                 viewbox_width,
                 viewbox_height,
                 commands,
+                has_fill,
             });
         }
     });
