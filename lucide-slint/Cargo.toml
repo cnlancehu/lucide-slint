@@ -1,7 +1,7 @@
 [package]
 name = "lucide-slint"
 description = "Use lucide icons in Slint applications with ease!"
-version = "0.563.1"
+version = "0.564.0"
 edition = "2024"
 license = "MIT AND ISC"
 include = ["lib.slint", "src/lib.rs"]
