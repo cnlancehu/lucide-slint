@@ -131,7 +131,7 @@
 //! | `absolute-stroke-width` | bool                                                                                 | Whether the size of the stroke width will be relative to the size of the icon. | `false`       | [Absolute stroke width](https://lucide.dev/guide/basics/stroke-width#absolute-stroke-width) |
 //!
 //! ### Icon Out properties
-//! All icons have the following out properties:
+//! `IconDisplay` have the following out properties:
 //!
 //! | Property                  | Type                                                                                 | Description                                                                                                               |
 //! | ------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
