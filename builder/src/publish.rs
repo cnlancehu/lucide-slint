@@ -116,6 +116,12 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         if let Ok(github_env_path) = env::var("GITHUB_ENV") {
+            #[cfg(windows)]
+            cmd!("pnpm.cmd", "install").dir("svgoptimize").run()?;
+
+            #[cfg(not(windows))]
+            cmd!("pnpm", "install").dir("svgoptimize").run()?;
+
             let mut file =
                 OpenOptions::new().append(true).open(github_env_path)?;
             writeln!(file, "LUCIDE_VERSION={}", version)

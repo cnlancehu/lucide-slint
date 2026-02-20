@@ -91,7 +91,11 @@ fn preprocess_icons_svg(
         }
     }
 
+    #[cfg(windows)]
     cmd!("pnpm.cmd", "start").dir("svgoptimize").run()?;
+
+    #[cfg(not(windows))]
+    cmd!("pnpm", "start").dir("svgoptimize").run()?;
 
     Ok(())
 }
