@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{env, fs::OpenOptions, io::Write, path::Path, process::exit};
 
 use cnxt::Colorize;
 use duct::cmd;
@@ -103,6 +103,25 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
         .get_mut("package")
         .and_then(|pkg| pkg.get_mut("version"))
     {
+        if version_entry.as_str() == Some(&version) {
+            println!(
+                "{}",
+                format!(
+                    "Cargo.toml already has version {}, skipping update",
+                    version
+                )
+                .bright_yellow()
+            );
+            exit(11);
+        }
+
+        if let Ok(github_env_path) = env::var("GITHUB_ENV") {
+            let mut file =
+                OpenOptions::new().append(true).open(github_env_path)?;
+            writeln!(file, "LUCIDE_VERSION={}", version)
+                .expect("fAiled to write LUCIDE_VERSION to GITHUB_ENV");
+        }
+
         *version_entry = toml_edit::value(version);
         std::fs::write(cargo_toml_path, cargo_toml.to_string())?;
         generate::run()?;

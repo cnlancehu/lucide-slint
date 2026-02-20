@@ -1,0 +1,73 @@
+name: Publish
+
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build
+        id: run_cargo
+        run: |
+          set +e 
+
+          cargo run -- publish
+          EXIT_CODE=$?
+
+          set -e
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "status=continue" >> $GITHUB_OUTPUT
+          elif [ $EXIT_CODE -eq 11 ]; then
+            echo "status=stop" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Error: Cargo failed with unexpected code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
+
+      - name: Commit files
+        if: steps.run_cargo.outputs.status == 'continue'
+        run: |
+          cargo update
+          git config --local user.email "2124757129@qq.com"
+          git config --local user.name "Lance"
+          git commit -a -m "Version bump"
+
+      - name: Push changes
+        if: steps.run_cargo.outputs.status == 'continue'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - name: cargo login
+        if: steps.run_cargo.outputs.status == 'continue'
+        run: |
+          echo "${{ secrets.CRATES_IO_API_TOKEN }}" | cargo login
+          cargo publish -p lucide-slint --allow-dirty
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: steps.run_cargo.outputs.status == 'continue'
+        with:
+          tag_name: ${{ env.LUCIDE_VERSION }}
+          target_commitish: ${{ github.ref }}
+          body: |
+            > [!WARNING]
+            > This release requires **Slint 1.15+**.
+
+            ### Sync: Lucide ${{ env.LUCIDE_VERSION }}
+          files: lucide-slint/lib.slint
+          github_token: ${{ secrets.GH_TOKEN }}

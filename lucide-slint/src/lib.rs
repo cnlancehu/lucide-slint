@@ -158,7 +158,7 @@
 //! }
 //! ```
 //!
-//! ## [**Try it in SlintPad**](https://slintpad.com/?lib=lucide%3Dhttps%3A%2F%2Fpkg.lance.fun%2Fgo%2Flucide-slint%2Fnext%2Flib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA%3D)
+//! ## [**Try it in SlintPad**](https://slintpad.com/?lib=lucide=https://pkg.lance.fun/go/lucide-slint/latest/lib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA=)
 //!
 //! ![screenshot](https://github.com/cnlancehu/lucide-slint/raw/main/assets/try-it-in-slintpad.webp)
 //!
