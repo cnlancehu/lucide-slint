@@ -2,7 +2,7 @@ name: Publish
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "23 2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -23,8 +23,6 @@ jobs:
         name: Install pnpm
         with:
           version: 10
-          cache: true
-
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2
 
@@ -81,4 +79,4 @@ jobs:
 
             ### Sync: Lucide ${{ env.LUCIDE_VERSION }}
           files: lucide-slint/lib.slint
-          github_token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
