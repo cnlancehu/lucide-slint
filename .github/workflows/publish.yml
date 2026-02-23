@@ -79,4 +79,4 @@ jobs:
 
             ### Sync: Lucide ${{ env.LUCIDE_VERSION }}
           files: lucide-slint/lib.slint
-          token: ${{ secrets.GH_TOKEN }}
+
