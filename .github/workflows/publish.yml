@@ -74,9 +74,6 @@ jobs:
           tag_name: ${{ env.LUCIDE_VERSION }}
           target_commitish: ${{ github.ref }}
           body: |
-            > [!WARNING]
-            > This release requires **Slint 1.15+**.
-
-            ### Sync: Lucide ${{ env.LUCIDE_VERSION }}
+            ## Lucide ${{ env.LUCIDE_VERSION }}
+            Bump Lucide version to ${{ env.LUCIDE_VERSION }}.
           files: lucide-slint/lib.slint
-
