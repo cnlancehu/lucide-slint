@@ -9,8 +9,8 @@
   },
   "author": "Lance <me@lance.fun>",
   "license": "MIT",
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.32.1",
   "dependencies": {
-    "svgo": "^4.0.0"
+    "svgo": "^4.0.1"
   }
 }
