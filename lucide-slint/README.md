@@ -1,22 +1,3 @@
-<p align="center">
-  <a href="https://github.com/cnlancehu/lucide-slint#gh-light-mode-only">
-    <img src="https://github.com/cnlancehu/lucide-slint/raw/main/assets/logo-light.svg#gh-light-mode-only" width="600">
-  </a>
-  <a href="https://github.com/cnlancehu/lucide-slint#gh-dark-mode-only">
-    <img src="https://github.com/cnlancehu/lucide-slint/raw/main/assets/logo-dark.svg#gh-dark-mode-only" width="600">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://crates.io/crates/lucide-slint"><img alt="Crates.io" src="https://img.shields.io/crates/v/lucide-slint"></a>
-</p>
-
-<p align="center">
-  <a href="https://crates.io/crates/lucide-slint">crates.io</a>
-  ·
-  <a href="https://docs.rs/lucide-slint/">Documentation</a>
-</p>
-
 ## Lucide Slint
 
 Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide)
