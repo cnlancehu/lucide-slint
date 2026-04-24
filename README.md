@@ -11,15 +11,9 @@
   <a href="https://crates.io/crates/lucide-slint"><img alt="Crates.io" src="https://img.shields.io/crates/v/lucide-slint"></a>
 </p>
 
-<p align="center">
-  <a href="https://crates.io/crates/lucide-slint">crates.io</a>
-  ·
-  <a href="https://docs.rs/lucide-slint/">Documentation</a>
-</p>
-
 ## Lucide Slint
 
-Implementation of the [lucide icon library](https://github.com/lucide-icons/lucide)
+Implementation of the [Lucide icon library](https://github.com/lucide-icons/lucide)
 for [Slint](https://github.com/slint-ui/slint).
 
 Use lucide icons in your Slint applications with ease!
