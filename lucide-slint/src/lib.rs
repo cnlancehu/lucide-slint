@@ -9,13 +9,15 @@
 //!
 //! **🚀 Optimized Performance**
 //!
-//! All icons are pre-converted to [Path element](https://docs.slint.dev/latest/docs/slint/reference/elements/path/),
-//! eliminating runtime SVG parsing overhead for better performance and reduced memory footprint.
+//! All icons are pre-converted to Slint [Path elements](https://docs.slint.dev/latest/docs/slint/reference/elements/path/), eliminating runtime SVG parsing overhead. This ensures faster rendering and a reduced memory footprint.
 //!
 //! **🎨 Full Property Support**
 //!
-//! All configuration properties from the official Lucide package are supported, giving you complete control over icon
-//! appearance.
+//! Every configuration property from the official Lucide package is fully supported, giving you complete control over the appearance of your icons.
+//!
+//! **🔄 Automated Version Syncing**
+//!
+//! Automatically synced with the latest Lucide releases via GitHub Actions. Access the newest icons and features instantly with a simple `cargo update`.
 //!
 //! ## Installation
 //!
