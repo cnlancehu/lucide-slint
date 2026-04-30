@@ -17,7 +17,7 @@
 //!
 //! **🔄 Automated Version Syncing**
 //!
-//! Automatically synced with the latest Lucide releases via GitHub Actions. Access the newest icons and features instantly with a simple `cargo update`.
+//! Automatically synced with the latest Lucide releases via GitHub Actions. Access the newest icons instantly with a simple `cargo update`.
 //!
 //! ## Installation
 //!

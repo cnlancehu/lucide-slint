@@ -9,6 +9,7 @@
 
 <p align="center">
   <a href="https://crates.io/crates/lucide-slint"><img alt="Crates.io" src="https://img.shields.io/crates/v/lucide-slint"></a>
+  <a href="https://deepwiki.com/cnlancehu/lucide-slint"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </p>
 
 ## Lucide Slint
@@ -30,7 +31,7 @@ Every configuration property from the official Lucide package is fully supported
 
 **🔄 Automated Version Syncing**
 
-Automatically synced with the latest Lucide releases via GitHub Actions. Access the newest icons and features instantly with a simple `cargo update`.
+Automatically synced with the latest Lucide releases via GitHub Actions. Access the newest icons instantly with a simple `cargo update`.
 
 ## Installation
 
