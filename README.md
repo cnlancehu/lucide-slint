@@ -183,12 +183,54 @@ These properties align with the standard Lucide icon configuration.
 
 | Property                | Type                                                                                 | Description                                                                    | Default       | Reference                                                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------- | --------------------------------------------------------------------------------------------------------------- |
-| `icon`                  | Icon                                                                                 | The specific icon to display from the IconSet enum                             | -             | -                                                                                                               |
+| `icon`                  | [Icon](#icon)                                                                        | The specific icon to display from the IconSet enum                             | -             | -                                                                                                               |
 | `size`                  | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon                                                           | `24px`        | [Sizing](https://lucide.dev/guide/react/basics/sizing)                                                          |
 | `stroke`                | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon                                                   | `white`       | [Color](https://lucide.dev/guide/react/basics/color)                                                            |
 | `stroke-fill`           | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke fill color of the icon                                              | `transparent` | [Filled Icons](https://lucide.dev/guide/react/advanced/filled-icons)                                            |
 | `stroke-width`          | float  (unit: px)                                                                    | The stroke width of the icon                                                   | `2`           | [Stroke width](https://lucide.dev/guide/react/basics/stroke-width#adjusting-stroke-width-with-strokewidth-prop) |
 | `absolute-stroke-width` | bool                                                                                 | Whether the size of the stroke width will be relative to the size of the icon. | `false`       | [Absolute stroke width](https://lucide.dev/guide/react/basics/stroke-width#absolute-stroke-width)               |
+
+### Library Exports
+
+All exports can be imported as follows:
+
+```slint
+import { IconDisplay, IconSet, Icon } from "@lucide";
+```
+
+#### Icon
+
+A struct representing an icon, which can be used as a property for `IconDisplay`.
+
+When writing a custom component that displays an icon, you can use `Icon` as the property type. For example:
+
+```slint
+import { Icon, IconDisplay } from "@lucide";
+
+export component MyComponent {
+    in property <Icon> icon;
+
+    IconDisplay {
+        icon: icon;
+    }
+}
+
+// Usage
+import { IconSet } from "@lucide";
+
+MyComponent {
+    icon: IconSet.AArrowDown;
+}
+```
+
+#### IconSet
+
+A Global containing all available icons. Each icon is represented as a property of type [`Icon`](#icon).
+
+#### IconDisplay
+
+A component that displays a Lucide icon.
+
 
 ## Available Icons
 
