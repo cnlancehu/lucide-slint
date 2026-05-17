@@ -3,6 +3,6 @@ name = "lucide-slint"
 description = "Use lucide icons in Slint applications with ease!"
 version = "1.16.0"
 edition = "2024"
-license = "MIT AND ISC"
+license = "(MIT OR Apache-2.0) AND ISC"
 include = ["lib.slint", "src/lib.rs"]
 repository = "https://github.com/cnlancehu/lucide-slint"

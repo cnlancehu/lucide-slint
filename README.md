@@ -212,12 +212,19 @@ export component Example {
 }
 ```
 
-## [**Try it in SlintPad**](https://slintpad.com/?lib=lucide=https://pkg.lance.fun/go/lucide-slint/latest/lib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA=)
+<!-- ## [**Try it in SlintPad**](https://slintpad.com/?lib=lucide=https://pkg.lance.fun/go/lucide-slint/latest/lib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA=)
 
 ![screenshot](https://github.com/cnlancehu/lucide-slint/raw/main/assets/try-it-in-slintpad.webp)
 
-Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease.
+Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease. -->
 
 ## License
 
-This project is licensed under the MIT License, while Lucide is licensed under [the ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).
+This project is licensed under either of:
+
+- [Apache License, Version 2.0](LICENSE-APACHE)
+- [MIT license](LICENSE-MIT)
+
+at your option.
+
+The Lucide icons are licensed under the [ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).

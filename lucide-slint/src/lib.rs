@@ -205,9 +205,6 @@
 //!
 //! Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease.
 //!
-//! ## License
-//!
-//! This project is licensed under the MIT License, while Lucide is licensed under [the ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).
 
 /// Returns the file path to the `lib.slint` file included in this crate.
 ///
