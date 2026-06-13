@@ -9,7 +9,7 @@ use duct::cmd;
 use tera::{Context, Tera};
 use usvg::{Node, Options, Tree, WriteOptions, tiny_skia_path::PathSegment};
 
-use crate::definition::{self, IconMetadata};
+use crate::definition;
 
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     let mut template = Tera::default();
@@ -25,8 +25,7 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     preprocess_icons_svg(&icons_dir_path, &icons_process_dir_path)?;
 
     let icon_names = read_icon_names(&icons_process_dir_path)?;
-    let icons =
-        process_icons(&icons_dir_path, &icons_process_dir_path, icon_names)?;
+    let icons = process_icons(&icons_process_dir_path, icon_names)?;
 
     generate_slint_file(&template, &target_dir_path, &icons)?;
 
@@ -101,7 +100,6 @@ fn preprocess_icons_svg(
 }
 
 fn process_icons(
-    icons_dir_path: &Path,
     icons_process_dir_path: &Path,
     icon_names: Vec<String>,
 ) -> Result<Vec<definition::Icon>, Box<dyn std::error::Error>> {
@@ -110,7 +108,6 @@ fn process_icons(
         .map(|icon_name| {
             let icon_name_pascal = to_pascal_case(&icon_name);
             let icon_raw_svg_filename = format!("{}.svg", &icon_name);
-            let icon_metadata_filename = format!("{}.json", &icon_name);
             let icon_raw_svg = fs::read_to_string(
                 icons_process_dir_path.join(&icon_raw_svg_filename),
             )?;
@@ -129,15 +126,8 @@ fn process_icons(
                 );
             }
 
-            let icon_metadata =
-                fs::read(icons_dir_path.join(icon_metadata_filename))?;
-            let icon_metadata: IconMetadata =
-                serde_json::from_slice(&icon_metadata)?;
-            let deprecated = icon_metadata.deprecated;
-
             Ok(definition::Icon {
                 name_pascal: icon_name_pascal,
-                deprecated,
                 paths,
             })
         })

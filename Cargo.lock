@@ -111,7 +111,6 @@ dependencies = [
  "duct",
  "reqwest",
  "serde",
- "serde_json",
  "tera",
  "toml_edit",
  "usvg",
