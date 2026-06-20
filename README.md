@@ -39,7 +39,9 @@ Automatically synced with the latest Lucide releases via GitHub Actions. Access 
 
 The latest version of lucide-slint requires **Slint 1.15+**.
 
-Please ensure your project is using Slint 1.15 or later to avoid compatibility issues.
+For **no_std environments**, lucide-slint requires **Slint 1.17+**.
+
+Please ensure your project is using a compatible version of Slint to avoid compatibility issues.
 
 ### Rust (Cargo)
 
