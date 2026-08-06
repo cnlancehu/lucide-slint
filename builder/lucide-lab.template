@@ -1,0 +1,19 @@
+import { Icon } from "lucide.slint";
+
+export global LabIconSet {
+    {% for icon in icons %}
+    out property <Icon> {{ icon.name_pascal }}: {
+        paths: [
+            {% for path in icon.paths %}{
+                viewbox-x: {{ path.viewbox_x }},
+                viewbox-y: {{ path.viewbox_y }},
+                viewbox-width: {{ path.viewbox_width }},
+                viewbox-height: {{ path.viewbox_height }},
+
+                command: "{{ path.commands }}",
+                has_fill: {{ path.has_fill }},
+            }{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+    };
+    {% endfor %}
+}

@@ -1,0 +1,23 @@
+{
+    "name": "lucide-slint-scripts",
+    "version": "0.0.0",
+    "license": "MIT",
+    "author": "Lance <me@lance.fun>",
+    "scripts": {
+        "bump": "bun scripts/publish.ts",
+        "fmt": "bun oxfmt"
+    },
+    "dependencies": {
+        "svgo": "^4.0.2"
+    },
+    "devDependencies": {
+        "@lucide/lab": "^0.2.0",
+        "@types/bun": "^1.3.14",
+        "@types/node": "^26.1.2",
+        "lucide-static": "^1.28.0",
+        "oxfmt": "^0.62.0"
+    },
+    "peerDependencies": {
+        "typescript": "^6.0.3"
+    }
+}

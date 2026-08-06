@@ -79,7 +79,7 @@ lucide-slint library:
 # Download lucide-slint library
 set(LUCIDE_SLINT "${CMAKE_CURRENT_BINARY_DIR}/lucide.slint")
 if(NOT EXISTS "${LUCIDE_SLINT}")
-  file(DOWNLOAD "https://github.com/cnlancehu/lucide-slint/releases/latest/download/lib.slint" "${LUCIDE_SLINT}" SHOW_PROGRESS)
+  file(DOWNLOAD "https://github.com/cnlancehu/lucide-slint/releases/latest/download/lucide.slint" "${LUCIDE_SLINT}" SHOW_PROGRESS)
 endif()
 
 # Specify your Slint code entry here
@@ -89,6 +89,7 @@ slint_target_sources(my_application ui/main.slint
 ```
 
 ### Manual
+
 Download the latest `lib.slint` from the [releases page](https://github.com/cnlancehu/lucide-slint/releases/latest) and place it in your project.
 
 ## Usage
@@ -189,7 +190,7 @@ These properties align with the standard Lucide icon configuration.
 | `size`                  | [length](https://docs.slint.dev/latest/docs/slint/reference/primitive-types/#length) | The size of the icon                                                           | `24px`        | [Sizing](https://lucide.dev/guide/react/basics/sizing)                                                          |
 | `stroke`                | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke color of the icon                                                   | `white`       | [Color](https://lucide.dev/guide/react/basics/color)                                                            |
 | `stroke-fill`           | [brush](https://docs.slint.dev/latest/docs/slint/reference/colors-and-brushes/#_top) | The stroke fill color of the icon                                              | `transparent` | [Filled Icons](https://lucide.dev/guide/react/advanced/filled-icons)                                            |
-| `stroke-width`          | float  (unit: px)                                                                    | The stroke width of the icon                                                   | `2`           | [Stroke width](https://lucide.dev/guide/react/basics/stroke-width#adjusting-stroke-width-with-strokewidth-prop) |
+| `stroke-width`          | float (unit: px)                                                                     | The stroke width of the icon                                                   | `2`           | [Stroke width](https://lucide.dev/guide/react/basics/stroke-width#adjusting-stroke-width-with-strokewidth-prop) |
 | `absolute-stroke-width` | bool                                                                                 | Whether the size of the stroke width will be relative to the size of the icon. | `false`       | [Absolute stroke width](https://lucide.dev/guide/react/basics/stroke-width#absolute-stroke-width)               |
 
 ### Library Exports
@@ -232,7 +233,6 @@ A Global containing all available icons. Each icon is represented as a property 
 #### IconDisplay
 
 A component that displays a Lucide icon.
-
 
 ## Available Icons
 

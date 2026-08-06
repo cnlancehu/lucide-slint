@@ -9,7 +9,7 @@
 //!
 //! Please refer to [README](https://github.com/cnlancehu/lucide-slint)
 
-/// Returns the file path to the `lib.slint` file included in this crate.
+/// Returns the file path to the `lucide.slint` file included in this crate.
 ///
 /// ## Example in `build.rs`
 ///
@@ -30,5 +30,10 @@
 /// }
 /// ```
 pub fn lib() -> String {
-    concat!(env!("CARGO_MANIFEST_DIR"), "/lib.slint").to_string()
+    concat!(env!("CARGO_MANIFEST_DIR"), "/lucide.slint").to_string()
+}
+
+/// Returns the file path to the `lucide-lab.slint` file included in this crate.
+pub fn lib_lab() -> String {
+    concat!(env!("CARGO_MANIFEST_DIR"), "/lucide-lab.slint").to_string()
 }
