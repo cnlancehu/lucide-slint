@@ -1,8 +1,8 @@
 [package]
 name = "lucide-slint"
 description = "Use lucide icons in Slint applications with ease!"
-version = "1.28.1"
+version = "1.28.2"
 edition = "2024"
 license = "(MIT OR Apache-2.0) AND ISC"
-include = ["lib.slint", "src/lib.rs"]
+include = ["lucide.slint", "lucide-lab.slint", "src/lib.rs"]
 repository = "https://github.com/cnlancehu/lucide-slint"
