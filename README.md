@@ -57,16 +57,17 @@ Add the following to your `build.rs` file to import `lucide-slint` as a Slint li
 use std::{collections::HashMap, path::PathBuf};
 
 fn main() {
-    let library = HashMap::from([(
-        "lucide".to_string(),
-        PathBuf::from(lucide_slint::lib()),
-    )]);
-    let config = slint_build::CompilerConfiguration::new()
-        .with_library_paths(library);
+    let library = HashMap::from([
+        ("lucide".to_string(), PathBuf::from(lucide_slint::lib())),
+        (
+            // If you are not going to use Lucide Lab, remove this tuple
+            "lucide-lab".to_string(),
+            PathBuf::from(lucide_slint::lib_lab()),
+        ),
+    ]);
+    let config = slint_build::CompilerConfiguration::new().with_library_paths(library);
 
-    // Specify your Slint code entry here
-    slint_build::compile_with_config("ui/main.slint", config)
-        .expect("Slint build failed");
+    slint_build::compile_with_config("ui/main.slint", config).expect("Slint build failed");
 }
 ```
 
@@ -83,14 +84,14 @@ if(NOT EXISTS "${LUCIDE_SLINT}")
 endif()
 
 # Specify your Slint code entry here
-slint_target_sources(my_application ui/main.slint
+slint_target_sources(app ui/main.slint
   LIBRARY_PATHS lucide=${LUCIDE_SLINT}
 )
 ```
 
 ### Manual
 
-Download the latest `lib.slint` from the [releases page](https://github.com/cnlancehu/lucide-slint/releases/latest) and place it in your project.
+Download the latest `lucide.slint` from the [releases page](https://github.com/cnlancehu/lucide-slint/releases/latest) and place it in your project.
 
 ## Usage
 
@@ -176,6 +177,18 @@ export component Example {
 }
 ```
 
+Or, use an icon from the Lucide Lab:
+```slint
+import { IconDisplay } from "@lucide";
+import { LabIconSet } from "@lucide-lab";
+
+export component Example {
+    IconDisplay {
+        icon: LabIconSet.FlowerPot;
+    }
+}
+```
+
 ## Reference
 
 ### Icon Properties
@@ -199,6 +212,7 @@ All exports can be imported as follows:
 
 ```slint
 import { IconDisplay, IconSet, Icon } from "@lucide";
+import { LabIconSet } from "@lucide-lab";
 ```
 
 #### Icon
@@ -229,6 +243,9 @@ MyComponent {
 #### IconSet
 
 A Global containing all available icons. Each icon is represented as a property of type [`Icon`](#icon).
+
+#### LabIconSet
+A Global containing all available icons from the Lucide Lab package. Each icon is represented as a property of type [`Icon`](#icon), just like IconSet.
 
 #### IconDisplay
 
