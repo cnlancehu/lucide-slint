@@ -7,5 +7,4 @@ edition = "2024"
 cnxt = "0.1.6"
 serde = { version = "1.0.228", features = ["derive"] }
 tera = "2.1.0"
-toml_edit = "0.25.11"
 usvg = "0.48.1"

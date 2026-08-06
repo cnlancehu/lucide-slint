@@ -6,7 +6,7 @@ import lucideMeta from "lucide-static/package.json";
 import lucideLabMeta from "@lucide/lab/package.json";
 import { exit } from "process";
 import generate from "./generate";
-import { writeFile } from "fs/promises";
+import { appendFile, writeFile } from "fs/promises";
 
 let lucideVer = lucideMeta.version;
 let lucideLabVer = lucideLabMeta.version;
@@ -21,6 +21,15 @@ if (semverOrder === 1) {
     cargoToml.package.version = lucideVer;
     // @ts-ignore
     writeFile("./lucide-slint/Cargo.toml", TOML.stringify(cargoToml));
+    writeFile(
+        "release-notes.md",
+        `### Lucide ${lucideVer} with Lucide Lab ${lucideLabVer}\nVersion bump`,
+    );
+    const githubEnv = process.env.GITHUB_ENV;
+    if (githubEnv) {
+        await appendFile(githubEnv, `LUCIDE_VERSION=${lucideVer}\n`, "utf8");
+    }
+
     console.log(
         "Finished, use `cargo publish -p lucide-slint --allow-dirty` to publish the new version.",
     );
