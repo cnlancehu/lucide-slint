@@ -60,10 +60,16 @@ jobs:
                   github_token: ${{ secrets.GH_TOKEN }}
                   branch: ${{ github.ref }}
 
-            - name: cargo login
+            - name: Crates.io Auth
+              uses: rust-lang/crates-io-auth-action@v1
               if: steps.execute.outputs.status == 'continue'
+              id: auth
+
+            - name: Publish Crate
+              if: steps.execute.outputs.status == 'continue'
+              env:
+                  CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
               run: |
-                  echo "${{ secrets.CRATES_IO_API_TOKEN }}" | cargo login
                   cargo publish -p lucide-slint --allow-dirty
 
             - name: Release
