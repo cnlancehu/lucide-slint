@@ -2,7 +2,7 @@ name: Publish
 
 on:
     schedule:
-        - cron: "23 2 * * *"
+        - cron: "0 0 * * *"
     workflow_dispatch:
 
 permissions:
@@ -76,7 +76,7 @@ jobs:
                   cargo publish -p lucide-slint --allow-dirty
 
             - name: Release
-              uses: softprops/action-gh-release@v2
+              uses: softprops/action-gh-release@v3
               if: steps.execute.outputs.status == 'continue'
               with:
                   tag_name: ${{ env.LUCIDE_VERSION }}
