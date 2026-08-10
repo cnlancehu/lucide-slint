@@ -7,6 +7,7 @@ import lucideLabMeta from "@lucide/lab/package.json";
 import { exit } from "process";
 import generate from "./generate";
 import { appendFile, writeFile } from "fs/promises";
+import { buildDist } from "./dist";
 
 let lucideVer = lucideMeta.version;
 let lucideLabVer = lucideLabMeta.version;
@@ -29,6 +30,8 @@ if (semverOrder === 1) {
     if (githubEnv) {
         await appendFile(githubEnv, `LUCIDE_VERSION=${lucideVer}\n`, "utf8");
     }
+
+    await buildDist(lucideVer);
 
     console.log(
         "Finished, use `cargo publish -p lucide-slint --allow-dirty` to publish the new version.",

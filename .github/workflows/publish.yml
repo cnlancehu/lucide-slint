@@ -83,5 +83,4 @@ jobs:
                   target_commitish: ${{ github.ref }}
                   body_path: release-notes.md
                   files: |
-                      lucide-slint/lucide.slint
-                      lucide-slint/lucide-lab.slint
+                      dist/*

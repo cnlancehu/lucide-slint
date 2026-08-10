@@ -178,6 +178,7 @@ export component Example {
 ```
 
 Or, use an icon from the Lucide Lab:
+
 ```slint
 import { IconDisplay } from "@lucide";
 import { LabIconSet } from "@lucide-lab";
@@ -245,6 +246,7 @@ MyComponent {
 A Global containing all available icons. Each icon is represented as a property of type [`Icon`](#icon).
 
 #### LabIconSet
+
 A Global containing all available icons from the Lucide Lab package. Each icon is represented as a property of type [`Icon`](#icon), just like IconSet.
 
 #### IconDisplay
