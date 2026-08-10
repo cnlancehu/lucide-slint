@@ -32,9 +32,31 @@ project(
 )
 
 set(
-    LucideSlint_LIBRARY_PATHS
+    LucideSlint_LUCIDE_LIBRARY_PATH
     "lucide=\${CMAKE_CURRENT_LIST_DIR}/lucide.slint"
+)
+
+set(
+    LucideSlint_LUCIDE_LAB_LIBRARY_PATH
     "lucide-lab=\${CMAKE_CURRENT_LIST_DIR}/lucide-lab.slint"
+)
+
+set(
+    LucideSlint_LIBRARY_PATHS
+    "\${LucideSlint_LUCIDE_LIBRARY_PATH}"
+    "\${LucideSlint_LUCIDE_LAB_LIBRARY_PATH}"
+)
+
+set(
+    LucideSlint_LUCIDE_LIBRARY_PATH
+    "\${LucideSlint_LUCIDE_LIBRARY_PATH}"
+    PARENT_SCOPE
+)
+
+set(
+    LucideSlint_LUCIDE_LAB_LIBRARY_PATH
+    "\${LucideSlint_LUCIDE_LAB_LIBRARY_PATH}"
+    PARENT_SCOPE
 )
 
 set(

@@ -83,9 +83,21 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(LucideSlint)
+```
 
+Setup with Lucide & Lucide Lab:
+
+```cmake
 slint_target_sources(my_application ui/app-window.slint
     LIBRARY_PATHS ${LucideSlint_LIBRARY_PATHS}
+)
+```
+
+Setup with Lucide only:
+
+```cmake
+slint_target_sources(my_application ui/app-window.slint
+    LIBRARY_PATHS ${LucideSlint_LUCIDE_LIBRARY_PATH}
 )
 ```
 
