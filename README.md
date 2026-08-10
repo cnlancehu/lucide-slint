@@ -77,15 +77,15 @@ For C++ projects using CMake, append the following to your `CMakeLists.txt` file
 lucide-slint library:
 
 ```cmake
-# Download lucide-slint library
-set(LUCIDE_SLINT "${CMAKE_CURRENT_BINARY_DIR}/lucide.slint")
-if(NOT EXISTS "${LUCIDE_SLINT}")
-  file(DOWNLOAD "https://github.com/cnlancehu/lucide-slint/releases/latest/download/lucide.slint" "${LUCIDE_SLINT}" SHOW_PROGRESS)
-endif()
+FetchContent_Declare(
+    LucideSlint
+    URL https://github.com/cnlancehu/lucide-slint/releases/latest/download/cmake.tar.gz
+)
 
-# Specify your Slint code entry here
-slint_target_sources(app ui/main.slint
-  LIBRARY_PATHS lucide=${LUCIDE_SLINT}
+FetchContent_MakeAvailable(LucideSlint)
+
+slint_target_sources(my_application ui/app-window.slint
+    LIBRARY_PATHS ${LucideSlint_LIBRARY_PATHS}
 )
 ```
 
