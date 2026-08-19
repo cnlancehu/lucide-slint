@@ -19,8 +19,10 @@ for [Slint](https://github.com/slint-ui/slint).
 
 Use lucide icons in your Slint applications with ease!
 
-## [✨ Interactive tutorial](https://lance.hk/p/displaying-icons-in-slint/)
-For a deep dive into Lucide Slint's internals and an interactive tutorial, I have [a post](https://lance.hk/p/displaying-icons-in-slint/) all about it!
+## [✨ Detailed tutorial](https://lance.hk/p/displaying-icons-in-slint/)
+For a deep dive into Lucide Slint's internals, interactive examples and more explanation, I have [a post](https://lance.hk/p/displaying-icons-in-slint/) all about it!
+
+There are also [some tips](https://lance.hk/p/displaying-icons-in-slint/#tips) that might be helpful.
 
 ## Features
 
@@ -270,15 +272,20 @@ A component that displays a Lucide icon.
 
 ## Available Icons
 
-For a complete list of available icons, visit the [Lucide Icons](https://lucide.dev/icons/) website.
+You can search for an icon on the [Lucide Icons](https://lucide.dev/icons/) website.
 
-To use an icon in Slint:
+To use it in Lucide Slint, follow these steps:
 
-1. Find your desired icon: `a-arrow-down`
-2. Click **Copy Component Name** to get the PascalCase name: `AArrowDown`
-   ![Copy Component Name](./assets/copy-component-name.png)
+1. Click an icon to open its details.
+   `a-arrow-down`
+2. Click the **ChevronUp button** to expand the copy menu.
+3. Select **Copy Component Name** to get the icon's PascalCase name.
+   `AArrowDown`
 
-**Example:**
+![Image guide for the operations](./assets/find-an-icon.webp)
+
+
+Then use its PascalCase name with `IconSet`:
 
 ```slint
 import { IconDisplay, IconSet } from "@lucide";
@@ -289,12 +296,6 @@ export component Example {
     }
 }
 ```
-
-<!-- ## [**Try it in SlintPad**](https://slintpad.com/?lib=lucide=https://pkg.lance.fun/go/lucide-slint/latest/lib.slint&gz=H4sIAAAAAAAACpVPTWvDMAy9-1eIjMIGTfBua3Ipo5edC70bWwliju3JKsta8t9LUrqlsMOmg-A9vQ9EfYoscIYDspA1_jUOMELLsYciiys_yXUoucqeghSNopvhzcawo5y8-VrPYI_y7dz6oyWHRaMUDrPBxj7FgEFgh32EswKAu9IrM80iecFOQzaG-lZW7T-OxIy-udNkOmENz1qn4ecwqv-ni-E_JM8H4fiONQibkJNhDPKboGzJ-xq2ngIaLjs2jjDI40Y77Nbw0LbObBzoSuvVDF-s1lPfRDwtn7nuUV0Ae-ZJPb4BAAA=)
-
-![screenshot](https://github.com/cnlancehu/lucide-slint/raw/main/assets/try-it-in-slintpad.webp)
-
-Turn on the **View - Properties** panel and **select the icon** to modify icon properties with ease. -->
 
 ## License
 
