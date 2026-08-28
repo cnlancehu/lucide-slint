@@ -20,6 +20,7 @@ for [Slint](https://github.com/slint-ui/slint).
 Use lucide icons in your Slint applications with ease!
 
 ## [✨ Detailed tutorial](https://lance.hk/p/displaying-icons-in-slint/)
+
 For a deep dive into Lucide Slint's internals, interactive examples and more explanation, I have [a post](https://lance.hk/p/displaying-icons-in-slint/) all about it!
 
 There are also [some tips](https://lance.hk/p/displaying-icons-in-slint/#tips) that might be helpful.
@@ -283,7 +284,6 @@ To use it in Lucide Slint, follow these steps:
    `AArrowDown`
 
 ![Image guide for the operations](./assets/find-an-icon.webp)
-
 
 Then use its PascalCase name with `IconSet`:
 
