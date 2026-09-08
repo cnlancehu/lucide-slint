@@ -8,7 +8,7 @@
         "@lucide/lab": "^0.2.0",
         "@types/bun": "^1.4.0",
         "@types/node": "^26.4.0",
-        "lucide-static": "^1.41.0",
+        "lucide-static": "^1.42.0",
         "oxfmt": "^0.65.0",
         "svgo": "^4.1.0",
       },
@@ -86,7 +86,7 @@
 
     "entities": ["entities@4.5.0", "", {}, "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="],
 
-    "lucide-static": ["lucide-static@1.41.0", "", {}, "sha512-39fX7SH+Rwis0oUmLLOipOoFSiJll9yi2DyEGDaE7Sp0qQAEhEfMQ2scQNdWKeGVENGv1uXc5ZeZqBWsuhQSFg=="],
+    "lucide-static": ["lucide-static@1.42.0", "", {}, "sha512-S4jgNBM6Tm8TusfIvj2A9KQotIxT8Hsnby3csAVh1LeD3vHgI0li14oCiQmYj+0Jjo/2l7cVzaqgPdwmce338Q=="],
 
     "mdn-data": ["mdn-data@2.27.1", "", {}, "sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ=="],
 
