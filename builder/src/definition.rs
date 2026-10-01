@@ -8,11 +8,6 @@ pub struct Icon {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Path {
-    pub viewbox_x: f32,
-    pub viewbox_y: f32,
-    pub viewbox_width: f32,
-    pub viewbox_height: f32,
     pub commands: String,
-
     pub has_fill: bool,
 }

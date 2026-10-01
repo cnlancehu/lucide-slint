@@ -49,15 +49,13 @@ pub fn run_lucide_lab() {
 fn generate_icons(files: ReadDir) -> Vec<Icon> {
     let mut icons = Vec::new();
     for file in files
-        .filter_map(|f| if let Ok(f) = f { Some(f) } else { None })
-        .filter(|f| {
-            f.file_type().and_then(|t| Ok(t.is_file())).is_ok_and(|r| r)
-        })
+        .filter_map(|f| f.ok())
+        .filter(|f| f.file_type().map(|t| t.is_file()).is_ok_and(|r| r))
     {
         if let Some(file_name) = file.path().file_name()
             && let Some(name) = file_name.to_str()
         {
-            let content = fs::read_to_string(&file.path()).unwrap();
+            let content = fs::read_to_string(file.path()).unwrap();
             let tree = Tree::from_str(&content, &Options::default()).unwrap();
             let paths = read_paths_from_tree(&tree);
 
@@ -85,28 +83,15 @@ fn read_paths_from_tree(tree: &Tree) -> Vec<definition::Path> {
             .yellow()
         );
     }
-    let size = width;
     let mut paths: Vec<definition::Path> = Vec::new();
 
     tree.root().children().iter().for_each(|node| {
         if let Node::Path(path) = node {
             let data = path.data();
-            let path_bounding_box = path.abs_bounding_box();
 
-            let viewbox_x = -path_bounding_box.left() / size;
-            let viewbox_y = -path_bounding_box.top() / size;
-            let viewbox_width = width + viewbox_x.abs();
-            let viewbox_height = height + viewbox_y.abs();
             let commands = path_segments_to_str(data).unwrap();
             let has_fill = path.fill().is_some();
-            paths.push(definition::Path {
-                viewbox_x,
-                viewbox_y,
-                viewbox_width,
-                viewbox_height,
-                commands,
-                has_fill,
-            });
+            paths.push(definition::Path { commands, has_fill });
         }
     });
 

@@ -1,9 +1,4 @@
 export struct PathElem {
-    viewbox-x: float,
-    viewbox-y: float,
-    viewbox-width: float,
-    viewbox-height: float,
-
     command: string,
     has_fill: bool,
 }
@@ -17,11 +12,6 @@ export global IconSet {
     out property <Icon> {{ icon.name_pascal }}: {
         paths: [
             {% for path in icon.paths %}{
-                viewbox-x: {{ path.viewbox_x }},
-                viewbox-y: {{ path.viewbox_y }},
-                viewbox-width: {{ path.viewbox_width }},
-                viewbox-height: {{ path.viewbox_height }},
-
                 command: "{{ path.commands }}",
                 has_fill: {{ path.has_fill }},
             }{% if not loop.last %},{% endif %}{% endfor %}
@@ -44,12 +34,12 @@ export component IconDisplay inherits Rectangle {
     clip: false;
 
     for path in icon.paths: Path {
-        x: 0;
-        y: 0;
-        viewbox-x: path.viewbox-x;
-        viewbox-y: path.viewbox-y;
-        viewbox-width: path.viewbox-width;
-        viewbox-height: path.viewbox-height;
+        x: -parent.calculated-stroke-width / 2;
+        y: -parent.calculated-stroke-width / 2;
+        viewbox-x: 0;
+        viewbox-y: 0;
+        viewbox-width: 24;
+        viewbox-height: 24;
         commands: path.command;
         stroke: parent.stroke;
         fill: path.has_fill ? parent.stroke : parent.stroke-fill;
