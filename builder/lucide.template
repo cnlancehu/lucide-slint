@@ -34,8 +34,6 @@ export component IconDisplay inherits Rectangle {
     clip: false;
 
     for path in icon.paths: Path {
-        x: -parent.calculated-stroke-width / 2;
-        y: -parent.calculated-stroke-width / 2;
         viewbox-x: 0;
         viewbox-y: 0;
         viewbox-width: 24;
