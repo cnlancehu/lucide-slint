@@ -1,6 +1,4 @@
-import { $, semver, TOML } from "bun";
-
-await $`bun update "@lucide/lab" "lucide-static"`;
+import { semver, TOML } from "bun";
 
 import lucideMeta from "lucide-static/package.json";
 import lucideLabMeta from "@lucide/lab/package.json";
