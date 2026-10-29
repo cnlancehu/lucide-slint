@@ -5,7 +5,7 @@
     "": {
       "name": "lucide-slint-scripts",
       "devDependencies": {
-        "@lucide/lab": "^0.2.0",
+        "@lucide/lab": "^0.7.0",
         "@types/bun": "^1.4.4",
         "@types/node": "^26.6.6",
         "lucide-static": "^1.64.0",
@@ -18,7 +18,7 @@
     },
   },
   "packages": {
-    "@lucide/lab": ["@lucide/lab@0.2.0", "", {}, "sha512-5zXVyp+HizDgWjGX8v3yNEijo7yJwoHS5Icj9qeqBCIHPWxVNGofbEXtnHEJ1VZ71Uhho32AX6xpHVWtWbPO2g=="],
+    "@lucide/lab": ["@lucide/lab@0.7.0", "", {}, "sha512-Cy4z/LUtre/XnnWTIRfgAxSB2+OGF4oqZczgYr05iRa7ecNtDKVDmTbPc4Ak8LkJYj7jGGN+AfkR9MYgXmdRRA=="],
 
     "@oxfmt/binding-android-arm-eabi": ["@oxfmt/binding-android-arm-eabi@0.65.0", "", { "os": "android", "cpu": "arm" }, "sha512-M10Gs1SSpTNI6ahGx3M/OlIdUF4hkaP6OgUb+MS79t/Pgflk3r1nW5gPFqsZGUAXg0H1AfANT9AvLdBSTIhZKg=="],
 
