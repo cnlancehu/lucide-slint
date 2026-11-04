@@ -86,9 +86,9 @@ dependencies = [
 
 [[package]]
 name = "crc32fast"
-version = "1.5.3"
+version = "1.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0ba106e844045ddc02c20768ac4b0b7cb45f2cc2ecbd833ac9f5dacb183c2055"
+checksum = "5f97d3416d5337d15c4b0d78c8c91df922ca143f57ec20e2d1c188333047ef04"
 dependencies = [
  "cfg-if",
 ]
@@ -199,7 +199,7 @@ checksum = "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c"
 
 [[package]]
 name = "lucide-slint"
-version = "1.66.0"
+version = "1.67.0"
 
 [[package]]
 name = "memchr"
@@ -446,9 +446,9 @@ checksum = "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563"
 
 [[package]]
 name = "unicode-script"
-version = "0.5.8"
+version = "0.5.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "383ad40bb927465ec0ce7720e033cb4ca06912855fc35db31b5755d0de75b1ee"
+checksum = "aa04c955db05429d464c74d495c1ee677e1866e783a4c3747f9c0cef7756cabf"
 
 [[package]]
 name = "unicode-vo"

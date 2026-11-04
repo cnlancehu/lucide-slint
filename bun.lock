@@ -5,10 +5,10 @@
     "": {
       "name": "lucide-slint-scripts",
       "devDependencies": {
-        "@lucide/lab": "^0.7.0",
+        "@lucide/lab": "^0.12.0",
         "@types/bun": "^1.4.4",
         "@types/node": "^26.6.6",
-        "lucide-static": "^1.66.0",
+        "lucide-static": "^1.67.0",
         "oxfmt": "^0.65.0",
         "svgo": "^4.1.0",
       },
@@ -18,7 +18,7 @@
     },
   },
   "packages": {
-    "@lucide/lab": ["@lucide/lab@0.7.0", "", {}, "sha512-Cy4z/LUtre/XnnWTIRfgAxSB2+OGF4oqZczgYr05iRa7ecNtDKVDmTbPc4Ak8LkJYj7jGGN+AfkR9MYgXmdRRA=="],
+    "@lucide/lab": ["@lucide/lab@0.12.0", "", {}, "sha512-x6gNsmSppU1ZUuT5kyYAAUeEC8IhqIAO917/sNzEG7QdIort7x/GJ6d0TP5YfSDczTdmK2OSacPAlvmpg7D2DQ=="],
 
     "@oxfmt/binding-android-arm-eabi": ["@oxfmt/binding-android-arm-eabi@0.65.0", "", { "os": "android", "cpu": "arm" }, "sha512-M10Gs1SSpTNI6ahGx3M/OlIdUF4hkaP6OgUb+MS79t/Pgflk3r1nW5gPFqsZGUAXg0H1AfANT9AvLdBSTIhZKg=="],
 
@@ -86,7 +86,7 @@
 
     "entities": ["entities@4.5.0", "", {}, "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="],
 
-    "lucide-static": ["lucide-static@1.66.0", "", {}, "sha512-j8Bjf/f21PtlD8p0wx1lRxyOrs98WZ1QEImkWmfskuJ8mOCwTN7Dwc6EHUzJDSzh79aB+Bo7SWcoTCM2zEjnJg=="],
+    "lucide-static": ["lucide-static@1.67.0", "", {}, "sha512-Lu/Ntwfw1GOQiNgTC2iHd/PC4QbqzwktLVFHTB84tldlfUjFgQ+EBWiZc/UPrlNdX97O/KXWRn792hIdQh6nhA=="],
 
     "mdn-data": ["mdn-data@2.27.1", "", {}, "sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ=="],
 
