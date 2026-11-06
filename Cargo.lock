@@ -199,7 +199,7 @@ checksum = "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c"
 
 [[package]]
 name = "lucide-slint"
-version = "1.69.0"
+version = "1.70.0"
 
 [[package]]
 name = "memchr"
